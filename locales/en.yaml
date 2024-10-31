@@ -1,0 +1,38 @@
+buttons:
+  theme: Theme
+dicom:
+  dicom: Setting
+  worklist: Setting
+  mpps: Setting
+  ups: Setting
+  workliststatus: Setting
+  mpps_mark: Setting
+sidebar:
+  home: Home
+  dicom: Setting
+  hl7: Setting
+  setting: Setting
+  mimsetting: Setting
+  hl7setting: Setting
+  hl7messagesetting: Setting
+from:
+  search: Search
+  add: Add
+  showfields: Select Fields
+  Update: Update
+  Delete: Delete
+  Actions: Actions
+  AddNewSetting: Add New Setting
+  AddHL7Message: Add HL7 Message Template
+  AddHL7AddressMessage: Add New HL7 IP AND PORT Setting
+  hl7name: Template Name
+  name: Name
+  hl7message: Template Content
+  Submit: Submit
+  Close: Close
+  Display: Select Fields to Display
+  Apply: Apply
+  results: No results found
+language:
+  en: English
+  zh: 中文

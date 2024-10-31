@@ -1,0 +1,36 @@
+buttons:
+  theme: 主题
+dicom:
+  dicom: 导出word文档测试
+  worklist: 测试
+  mpps: 导出word文档测试
+  ups: 设置测试
+  workliststatus: 可以导出word文档
+  mpps_mark: 已实现设置测试
+sidebar:
+  home: 主页
+  dicom: 主菜单
+  hl7: 测试
+  setting: 数据列表测试
+  mimsetting: 设置测试
+  hl7setting: 设置测试
+  hl7messagesetting: 设置测试
+from:
+  search: 搜索
+  add: 添加
+  showfields: 显示字段
+  Update: 更新
+  Delete: 删除
+  Actions: 操作
+  AddHL7Message: 添加HL7消息模板
+  hl7name: 设置命名
+  hl7message: 模板内容
+  name: Name
+  Submit: 提交
+  Close: 关闭
+  Display: 展示字段
+  Apply: 确认
+  results: 没找到任何结果
+language:
+  en: English
+  zn: 中文

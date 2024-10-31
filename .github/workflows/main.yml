@@ -1,0 +1,69 @@
+name: 'publish'
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  publish-tauri:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'macos-latest'
+            args: '--target aarch64-apple-darwin'
+          - platform: 'macos-latest'
+            args: '--target x86_64-apple-darwin'
+          - platform: 'windows-latest'
+            args: ''
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # 设置 Node.js 环境
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      # 安装 Rust 稳定版
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      # 安装 pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # 安装 LLVM
+      - name: Install LLVM on macOS
+        if: matrix.platform == 'macos-latest'
+        run: |
+          brew install llvm
+          echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> ~/.bash_profile
+          source ~/.bash_profile
+      - name: Install LLVM on Windows
+        if: matrix.platform == 'windows-latest'
+        run: |
+          choco install llvm
+
+      # 安装前端依赖
+      - name: install frontend dependencies
+        run: pnpm install
+
+      # 使用 tauri 构建
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: app-v__VERSION__
+          releaseName: 'App v__VERSION__'
+          releaseBody: 'See the assets to download this version and install.'
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
