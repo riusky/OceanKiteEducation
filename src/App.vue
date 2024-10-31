@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted } from "vue";
 import { themeChange } from "theme-change";
-import Layout from "@/layout/index.vue";
+// import Layout from "@/layout/index.vue";
 import { useI18n } from "vue-i18n";
 import { useGlobal } from "@pureadmin/utils";
+
 onMounted(() => {
   themeChange(false);
 });
@@ -18,4 +19,5 @@ onBeforeMount(() => {
 <template>
   <!-- <Layout /> -->
   <RouterView />
+  <!-- <Sidebar /> -->
 </template>

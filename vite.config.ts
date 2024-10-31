@@ -9,15 +9,21 @@ import {
 } from "./build/utils";
 const host = process.env.TAURI_DEV_HOST;
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
-import wasm from "vite-plugin-wasm";
+
+import autoprefixer from "autoprefixer";
+import tailwind from "tailwindcss";
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfigExport => {
   wrapperEnv(loadEnv(mode, root));
   return {
+    css: {
+      postcss: {
+        plugins: [tailwind(), autoprefixer()],
+      },
+    },
     plugins: [
       vue(),
-      wasm(),
       VueI18nPlugin({
         jitCompilation: false,
         include: [pathResolve("../locales/**")],
