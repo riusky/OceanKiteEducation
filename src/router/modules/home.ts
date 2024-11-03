@@ -13,7 +13,7 @@ export default {
     {
       path: "/dicom",
       name: "dicom",
-      component: () => import("@/views/dicom/index.vue"),
+      component: () => import("@/layout/index.vue"),
       meta: {
         title: $t("dicom.dicom"),
       },
