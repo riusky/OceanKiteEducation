@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { TrashIcon } from "lucide-vue-next";
+import { TrashIcon } from "@radix-icons/vue";
 import { ref } from "vue";
 import AutoFormLabel from "./AutoFormLabel.vue";
 import { beautifyObjectName } from "./utils";
@@ -57,7 +57,7 @@ async function parseFileAsString(file: File | undefined): Promise<string> {
           />
           <div
             v-else
-            class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-transparent pl-3 pr-1 py-1 text-sm shadow-sm transition-colors"
+            class="flex h-9 w-full items-center justify-between rounded-md border border-input bg-transparent pl-3 pr-1 py-1 text-sm shadow-sm transition-colors"
           >
             <p>{{ inputFile?.name }}</p>
             <Button
@@ -73,7 +73,7 @@ async function parseFileAsString(file: File | undefined): Promise<string> {
                 }
               "
             >
-              <TrashIcon :size="16" />
+              <TrashIcon />
             </Button>
           </div>
         </slot>

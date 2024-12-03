@@ -35,6 +35,7 @@ const props = withDefaults(
     "
     :as="as"
     :as-child="asChild"
-    ><slot
-  /></Primitive>
+  >
+    <slot />
+  </Primitive>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { cn } from "@/lib/utils";
-import { GripVertical } from "lucide-vue-next";
+import { DragHandleDots2Icon } from "@radix-icons/vue";
 import {
   SplitterResizeHandle,
   type SplitterResizeHandleEmits,
@@ -39,7 +39,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       <div
         class="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border"
       >
-        <GripVertical class="h-2.5 w-2.5" />
+        <DragHandleDots2Icon class="h-2.5 w-2.5" />
       </div>
     </template>
   </SplitterResizeHandle>

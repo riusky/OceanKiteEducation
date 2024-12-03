@@ -1,7 +1,10 @@
 <script lang="ts" setup>
+import type { HTMLAttributes } from "vue";
 import { CalendarGridHead, type CalendarGridHeadProps } from "radix-vue";
 
-const props = defineProps<CalendarGridHeadProps>();
+const props = defineProps<
+  CalendarGridHeadProps & { class?: HTMLAttributes["class"] }
+>();
 </script>
 
 <template>

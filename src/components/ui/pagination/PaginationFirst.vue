@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronsLeft } from "lucide-vue-next";
+import { DoubleArrowLeftIcon } from "@radix-icons/vue";
 import { PaginationFirst, type PaginationFirstProps } from "radix-vue";
 import { computed, type HTMLAttributes } from "vue";
 
@@ -21,9 +21,9 @@ const delegatedProps = computed(() => {
 
 <template>
   <PaginationFirst v-bind="delegatedProps">
-    <Button :class="cn('w-10 h-10 p-0', props.class)" variant="outline">
+    <Button :class="cn('w-9 h-9 p-0', props.class)" variant="outline">
       <slot>
-        <ChevronsLeft class="h-4 w-4" />
+        <DoubleArrowLeftIcon />
       </slot>
     </Button>
   </PaginationFirst>
