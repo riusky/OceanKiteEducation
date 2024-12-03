@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { cn } from "@/lib/utils";
-import { useEventListener, useVModel } from "@vueuse/core";
+import { useEventListener, useMediaQuery, useVModel } from "@vueuse/core";
 import { TooltipProvider } from "radix-vue";
 import { computed, type HTMLAttributes, type Ref, ref } from "vue";
 import {

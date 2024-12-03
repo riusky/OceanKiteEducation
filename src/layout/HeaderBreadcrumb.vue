@@ -1,5 +1,6 @@
 <template>
   <header
+    data-tauri-drag-region
     class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear justify-between"
   >
     <div class="flex items-center gap-2 px-4">
@@ -18,9 +19,9 @@
       </Breadcrumb>
     </div>
     <div class="flex items-center gap-2 mr-4">
-      <PinOff />
+      <!-- <PinOff /> -->
       <Pin />
-      <Minus @click="maximizeWindow" />
+      <Minus @click="minimizeWindow" />
       <MaximizeIcon @click="maximizeWindow" />
       <SquareX @click="closeWindow" />
     </div>
@@ -40,20 +41,30 @@ import {
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 
-// 可以在这里定义各个图标对应的处理函数
+// 引入 Tauri 的窗口 API
+import { getCurrentWindow } from "@tauri-apps/api/window";
+
+const appWindow = getCurrentWindow();
+
+// 窗口最大化
 function maximizeWindow() {
-  console.log("Maximize window");
-  // 添加你的最大化逻辑，比如调整某个元素的CSS属性
+  appWindow.isMaximized().then((isMaximized) => {
+    if (isMaximized) {
+      appWindow.unmaximize(); // 还原窗口
+    } else {
+      appWindow.maximize(); // 最大化窗口
+    }
+  });
 }
 
+// 窗口最小化
 function minimizeWindow() {
-  console.log("Minimize window");
-  // 添加你的最小化逻辑
+  appWindow.minimize();
 }
 
+// 关闭窗口
 function closeWindow() {
-  console.log("Close window");
-  // 添加关闭窗口的逻辑，如隐藏某个元素
+  appWindow.close();
 }
 </script>
 

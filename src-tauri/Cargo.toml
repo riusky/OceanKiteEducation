@@ -18,18 +18,33 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = [] }
-tauri-plugin-shell = "2"
-tauri-plugin-dialog = "2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+tauri = { version = "2.1.1", features = [] }
+tauri-plugin-shell = "2.0.2"
+tauri-plugin-dialog = "2.0.4"
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = "1.0.133"
 docx-rs = "0.4"
-rand = "0.8"
-chrono = "0.4"
+rand = "0.8.5"
+chrono = "0.4.38"
 
 [tauri.allowlist]
 fs = true # 允许文件系统访问
+
 [tauri.fs.scope]
 # 允许访问的路径，`$RESOURCE` 表示资源目录
 read = ["$RESOURCE/*"]
 write = ["$RESOURCE/database/*"]
+
+[profile.dev]
+opt-level = 1
+debug = true
+incremental = true
+
+
+[profile.release]
+opt-level = 3
+lto = true  # Link Time Optimization
+codegen-units = 1  # 减少并行生成单元，提高优化效果
+debug = false  # 生产环境移除调试符号
+panic = "abort"  # 减小程序崩溃的二进制体积
+incremental = false  # 禁用增量编译（节省二进制体积）
