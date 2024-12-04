@@ -10,6 +10,7 @@ import "./style/reset.scss";
 // 导入公共样式
 // import "./style/index.scss";
 import "./assets/index.css";
+import "./assets/themes.css";
 // 一定要在main.ts中导入tailwind.css，防止vite每次hmr都会请求src/style/index.scss整体css文件导致热更新慢的问题
 // import "./style/tailwind.css";
 
@@ -20,6 +21,6 @@ getPlatformConfig(app).then(async (config) => {
   await router.isReady();
   injectResponsiveStorage(app, config);
   app.use(useI18n);
-  console.log(config);
+  //   console.log(config);
   app.mount("#app");
 });

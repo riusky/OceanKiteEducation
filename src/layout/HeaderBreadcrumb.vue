@@ -19,17 +19,81 @@
       </Breadcrumb>
     </div>
     <div class="flex items-center gap-2 mr-4">
-      <!-- <PinOff /> -->
-      <Pin />
-      <Minus @click="minimizeWindow" />
-      <MaximizeIcon @click="maximizeWindow" />
-      <SquareX @click="closeWindow" />
+      <Popover>
+        <PopoverTrigger as-child>
+          <span
+            class="icon-container"
+            @mouseover="hoverIcon = 'paint'"
+            @mouseleave="hoverIcon = ''"
+          >
+            <PaintBrushIconOutline
+              v-if="hoverIcon !== 'paint'"
+              class="size-6"
+            />
+            <PaintBrushIcon v-else class="size-6" />
+          </span>
+        </PopoverTrigger>
+        <PopoverContent :side-offset="8" align="end" class="w-96">
+          <ThemeCustomizer :all-colors="allColors" />
+        </PopoverContent>
+      </Popover>
+
+      <!-- 鼠标悬停切换图标显示 -->
+      <span
+        class="icon-container"
+        @mouseover="hoverIcon = 'minus'"
+        @mouseleave="hoverIcon = ''"
+      >
+        <MinusCircleIconOutline
+          v-if="hoverIcon !== 'minus'"
+          class="size-6"
+          @click="minimizeWindow"
+        />
+        <MinusCircleIcon v-else class="size-6" @click="minimizeWindow" />
+      </span>
+      <!-- 动态切换最大化/还原图标 -->
+
+      <span
+        class="icon-container"
+        @mouseover="hoverIcon = 'max'"
+        @mouseleave="hoverIcon = ''"
+      >
+        <PlusCircleIconOutline
+          v-if="hoverIcon !== 'max'"
+          class="size-6"
+          @click="maximizeWindow"
+        />
+        <PlusCircleIcon v-else class="size-6" @click="maximizeWindow" />
+      </span>
+      <span
+        class="icon-container"
+        @mouseover="hoverIcon = 'close'"
+        @mouseleave="hoverIcon = ''"
+      >
+        <XCircleIconOutline
+          v-if="hoverIcon !== 'close'"
+          class="size-6"
+          @click="closeWindow"
+        />
+        <XCircleIcon v-else class="size-6" @click="closeWindow" />
+      </span>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { MaximizeIcon, Minus, SquareX, PinOff, Pin } from "lucide-vue-next";
+import { ref, onMounted, watch } from "vue";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import {
+  XCircleIcon,
+  MinusCircleIcon,
+  PlusCircleIcon,
+} from "@heroicons/vue/24/solid";
+import {
+  XCircleIcon as XCircleIconOutline,
+  MinusCircleIcon as MinusCircleIconOutline,
+  PlusCircleIcon as PlusCircleIconOutline,
+} from "@heroicons/vue/24/outline";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -40,20 +104,53 @@ import {
 } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
+import ThemeCustomizer from "@/components/theming/ThemeCustomizer.vue";
+import type { Color } from "@/components/theming/types/colors";
+import { PaintBrushIcon } from "@heroicons/vue/24/solid";
+import { PaintBrushIcon as PaintBrushIconOutline } from "@heroicons/vue/24/outline";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { useConfigStore } from "@/store/config";
 
-// 引入 Tauri 的窗口 API
-import { getCurrentWindow } from "@tauri-apps/api/window";
-
+// 窗口操作
 const appWindow = getCurrentWindow();
+const isMaximized = ref(false);
+const hoverIcon = ref(""); // 追踪鼠标悬停的图标状态
 
-// 窗口最大化
+const allColors: Color[] = [
+  "zinc",
+  "rose",
+  "blue",
+  "green",
+  "orange",
+  "red",
+  "slate",
+  "stone",
+  "gray",
+  "neutral",
+  "yellow",
+  "violet",
+];
+
+// 初始化窗口状态
+onMounted(() => {
+  appWindow.isMaximized().then((maximized) => {
+    isMaximized.value = maximized;
+  });
+});
+
+// 窗口最大化/还原
 function maximizeWindow() {
-  appWindow.isMaximized().then((isMaximized) => {
-    if (isMaximized) {
-      appWindow.unmaximize(); // 还原窗口
+  appWindow.isMaximized().then((maximized) => {
+    if (maximized) {
+      appWindow.unmaximize();
     } else {
-      appWindow.maximize(); // 最大化窗口
+      appWindow.maximize();
     }
+    isMaximized.value = !maximized;
   });
 }
 
@@ -66,8 +163,37 @@ function minimizeWindow() {
 function closeWindow() {
   appWindow.close();
 }
+
+const { theme, radius } = useConfigStore();
+
+// Whenever the component is mounted, update the document class list
+onMounted(() => {
+  document.documentElement.style.setProperty("--radius", `${radius.value}rem`);
+  document.documentElement.classList.add(`theme-${theme.value}`);
+});
+
+// Whenever the theme value changes, update the document class list
+watch(theme, (theme) => {
+  document.documentElement.classList.remove(
+    ...allColors.map((color) => `theme-${color}`),
+  );
+  document.documentElement.classList.add(`theme-${theme}`);
+});
+
+// Whenever the radius value changes, update the document style
+watch(radius, (radius) => {
+  document.documentElement.style.setProperty("--radius", `${radius}rem`);
+});
 </script>
 
 <style scoped>
-/* 这里你可以定义一些自定义样式来调整图标的尺寸和颜色 */
+.icon-container {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icon-container:hover {
+  transform: scale(1.1);
+}
 </style>
