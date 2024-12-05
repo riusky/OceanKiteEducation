@@ -45,8 +45,8 @@ export function useConfigStore() {
     config.value.radius = newRadius;
   }
 
-  function setIsDark(isDark: boolean) {
-    isDark.value = isDark;
+  function setIsDark(newValue: boolean) {
+    isDark.value = newValue;
   }
 
   const themePrimary = computed(() => {
