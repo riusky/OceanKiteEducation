@@ -4,6 +4,8 @@ import { themeChange } from "theme-change";
 // import Layout from "@/layout/index.vue";
 import { useI18n } from "vue-i18n";
 import { useGlobal } from "@pureadmin/utils";
+import { useColorMode } from "@vueuse/core";
+const mode = useColorMode();
 
 onMounted(() => {
   themeChange(false);

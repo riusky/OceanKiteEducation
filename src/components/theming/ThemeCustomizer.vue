@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RADII, useConfigStore } from "@/store/config";
 import { SunIcon, MoonIcon, CheckIcon } from "@heroicons/vue/24/outline";
-import { useMagicKeys, useToggle } from "@vueuse/core";
+import { useColorMode } from "@vueuse/core";
+import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
+import { LanguageIcon } from "@heroicons/vue/24/solid";
 
+const { t, locale, translationCh, translationEn } = useTranslationLang();
 defineProps<{
   allColors: Color[];
 }>();
@@ -14,27 +17,29 @@ defineProps<{
 const { theme, radius, setRadius, setTheme, isDark, setIsDark } =
   useConfigStore();
 
-const toggleDark = useToggle(isDark);
+const mode = useColorMode();
 </script>
 
 <template>
   <div class="p-4">
     <div class="grid space-y-1">
-      <h1 class="text-md text-foreground font-semibold">Customize</h1>
+      <h1 class="text-md text-foreground font-semibold">
+        {{ t("from.search") }}
+      </h1>
       <p class="text-xs text-muted-foreground">
         Pick a style and color for your components.
       </p>
       <Button>Test</Button>
     </div>
-    <div class="space-y-1.5 pt-6">
+    <div class="space-y-1 pt-4">
       <Label for="color" class="text-xs"> Color </Label>
-      <div class="grid grid-cols-3 gap-2 py-1.5">
+      <div class="grid grid-cols-3 gap-2 py-1">
         <Button
           v-for="(color, index) in allColors"
           :key="index"
           variant="outline"
           class="h-8 justify-start px-3"
-          :class="color === theme ? 'border-foreground border-2' : ''"
+          :class="color === theme ? 'border-foreground border-2 font-bold' : ''"
           @click="setTheme(color)"
         >
           <span
@@ -49,15 +54,15 @@ const toggleDark = useToggle(isDark);
         </Button>
       </div>
     </div>
-    <div class="space-y-1.5 pt-6">
+    <div class="space-y-1 pt-2">
       <Label for="radius" class="text-xs"> Radius </Label>
-      <div class="grid grid-cols-5 gap-2 py-1.5">
+      <div class="grid grid-cols-5 gap-2 py-1">
         <Button
           v-for="(r, index) in RADII"
           :key="index"
           variant="outline"
           class="h-8 justify-center px-3"
-          :class="r === radius ? 'border-foreground border-2' : ''"
+          :class="r === radius ? 'border-foreground border-2 font-bold' : ''"
           @click="setRadius(r)"
         >
           <span class="text-xs">
@@ -66,15 +71,15 @@ const toggleDark = useToggle(isDark);
         </Button>
       </div>
     </div>
-    <div class="space-y-1.5 pt-6">
+    <div class="space-y-1.5 pt-2">
       <Label for="theme" class="text-xs"> Theme </Label>
 
-      <div class="flex space-x-2 py-1.5">
+      <div class="flex space-x-2 py-1">
         <Button
           class="h-8"
           variant="outline"
-          :class="{ 'border-2 border-foreground': !isDark }"
-          @click="toggleDark(false)"
+          :class="{ 'border-2 border-foreground font-bold': mode == 'light' }"
+          @click="mode = 'light'"
         >
           <SunIcon class="w-4 h-4 mr-2" />
           <span class="text-xs">Light</span>
@@ -82,11 +87,35 @@ const toggleDark = useToggle(isDark);
         <Button
           class="h-8"
           variant="outline"
-          :class="{ 'border-2 border-foreground': isDark }"
-          @click="toggleDark(true)"
+          :class="{ 'border-2 border-foreground font-bold': mode == 'dark' }"
+          @click="mode = 'dark'"
         >
           <MoonIcon class="w-4 h-4 mr-2" />
           <span class="text-xs">Dark</span>
+        </Button>
+      </div>
+    </div>
+    <div class="space-y-1.5 pt-2">
+      <Label for="theme" class="text-xs"> Language </Label>
+
+      <div class="flex space-x-2 py-1.5">
+        <Button
+          class="h-8"
+          variant="outline"
+          :class="{ 'border-2 border-foreground font-bold': locale === 'zh' }"
+          @click="translationCh"
+        >
+          <!-- <SunIcon class="w-4 h-4 mr-2" /> -->
+          <span class="text-xs">{{ t("language.zh") }}</span>
+        </Button>
+        <Button
+          class="h-8"
+          variant="outline"
+          :class="{ 'border-2 border-foreground font-bold': locale === 'en' }"
+          @click="translationEn"
+        >
+          <!-- <MoonIcon class="w-4 h-4 mr-2" /> -->
+          <span class="text-xs"> {{ t("language.en") }}</span>
         </Button>
       </div>
     </div>

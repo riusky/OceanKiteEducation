@@ -114,7 +114,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useConfigStore } from "@/store/config";
-
+import { LanguageIcon } from "@heroicons/vue/24/solid";
+import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
+const { t, locale, translationCh, translationEn } = useTranslationLang();
 // 窗口操作
 const appWindow = getCurrentWindow();
 const isMaximized = ref(false);
