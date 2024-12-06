@@ -1,6 +1,5 @@
 buttons:
   theme: Theme
-from:
   search: Search
   add: Add
   showfields: Select Fields
@@ -18,6 +17,30 @@ from:
   Display: Select Fields to Display
   Apply: Apply
   results: No results found
+
 language:
   en: English
   zh: 中文
+
+Color:
+  zinc: zinc
+  slate: slate
+  stone: stone
+  gray: gray
+  neutral: neutral
+  red: red
+  rose: rose
+  orange: orange
+  green: green
+  blue: blue
+  yellow: yellow
+  violet: violet
+
+Setting:
+  Language: Language
+  Dark: Dark
+  Light: Light
+  Radius: Radius
+  Theme: Theme
+  Customize: Customize
+  CustomizeMessage: Pick a theme color that vibes with your soul!

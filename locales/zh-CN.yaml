@@ -1,6 +1,5 @@
 buttons:
   theme: 主题
-from:
   search: 搜索
   add: 添加
   showfields: 显示字段
@@ -10,12 +9,36 @@ from:
   AddHL7Message: 添加HL7消息模板
   hl7name: 设置命名
   hl7message: 模板内容
-  name: Name
+  name: 名称
   Submit: 提交
   Close: 关闭
   Display: 展示字段
   Apply: 确认
   results: 没找到任何结果
+
 language:
   en: English
   zn: 中文
+
+Color:
+  zinc: 锌灰
+  slate: 青灰
+  stone: 石色
+  gray: 灰色
+  neutral: 中性灰
+  red: 大红
+  rose: 玫瑰红
+  orange: 橘黄
+  green: 草绿
+  blue: 湖蓝
+  yellow: 明黄
+  violet: 紫罗兰
+
+Setting:
+  Language: 语言
+  Dark: 暗系
+  Light: 光系
+  Radius: 圆角
+  Theme: 主题
+  Customize: 自定义
+  CustomizeMessage: 选择一种与你灵魂共鸣的主题颜色!

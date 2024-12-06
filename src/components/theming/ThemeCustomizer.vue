@@ -24,15 +24,14 @@ const mode = useColorMode();
   <div class="p-4">
     <div class="grid space-y-1">
       <h1 class="text-md text-foreground font-semibold">
-        {{ t("from.search") }}
+        {{ t("Setting.Customize") }}
       </h1>
       <p class="text-xs text-muted-foreground">
-        Pick a style and color for your components.
+        {{ t("Setting.CustomizeMessage") }}
       </p>
-      <Button>Test</Button>
     </div>
     <div class="space-y-1 pt-4">
-      <Label for="color" class="text-xs"> Color </Label>
+      <Label for="color" class="text-xs"> {{ t("Setting.Color") }} </Label>
       <div class="grid grid-cols-3 gap-2 py-1">
         <Button
           v-for="(color, index) in allColors"
@@ -49,13 +48,13 @@ const mode = useColorMode();
             <CheckIcon v-if="color === theme" class="h-3 w-3 text-white" />
           </span>
           <span class="ml-2 text-xs capitalize">
-            {{ color }}
+            {{ t(`Color.${color}`) }}
           </span>
         </Button>
       </div>
     </div>
     <div class="space-y-1 pt-2">
-      <Label for="radius" class="text-xs"> Radius </Label>
+      <Label for="radius" class="text-xs"> {{ t("Setting.Radius") }} </Label>
       <div class="grid grid-cols-5 gap-2 py-1">
         <Button
           v-for="(r, index) in RADII"
@@ -72,7 +71,7 @@ const mode = useColorMode();
       </div>
     </div>
     <div class="space-y-1.5 pt-2">
-      <Label for="theme" class="text-xs"> Theme </Label>
+      <Label for="theme" class="text-xs"> {{ t("Setting.Theme") }} </Label>
 
       <div class="flex space-x-2 py-1">
         <Button
@@ -82,7 +81,7 @@ const mode = useColorMode();
           @click="mode = 'light'"
         >
           <SunIcon class="w-4 h-4 mr-2" />
-          <span class="text-xs">Light</span>
+          <span class="text-xs">{{ t("Setting.Light") }}</span>
         </Button>
         <Button
           class="h-8"
@@ -91,12 +90,12 @@ const mode = useColorMode();
           @click="mode = 'dark'"
         >
           <MoonIcon class="w-4 h-4 mr-2" />
-          <span class="text-xs">Dark</span>
+          <span class="text-xs">{{ t("Setting.Dark") }}</span>
         </Button>
       </div>
     </div>
     <div class="space-y-1.5 pt-2">
-      <Label for="theme" class="text-xs"> Language </Label>
+      <Label for="theme" class="text-xs"> t("Setting.Language") </Label>
 
       <div class="flex space-x-2 py-1.5">
         <Button
