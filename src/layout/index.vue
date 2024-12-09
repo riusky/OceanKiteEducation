@@ -9,8 +9,8 @@
       <SidebarContentNavigation
         :nav-main="data.navMain"
         :projects="data.projects"
+        @toggleActive="toggleActive"
       />
-      <!-- <SidebarProjects :projects="data.projects" /> -->
       <SidebarFooterUserMenu :user="data.user" />
       <SidebarRail />
     </Sidebar>
@@ -22,10 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import SidebarHeaderNavigation from "./SidebarHeaderNavigation.vue";
 import SidebarContentNavigation from "./SidebarContentNavigation.vue";
-import SidebarProjects from "./SidebarProjects.vue";
 import SidebarFooterUserMenu from "./SidebarFooterUserMenu.vue";
 import HeaderBreadcrumb from "./HeaderBreadcrumb.vue";
 import MainContent from "./MainContent.vue";
@@ -46,10 +45,10 @@ import {
   Map,
   PieChart,
   Settings2,
-  SquareTerminal,
 } from "lucide-vue-next";
 import avatar from "@/assets/32x32.png";
-const data = {
+
+const data = reactive({
   user: {
     name: "riusky",
     email: "riusky@163.com",
@@ -58,103 +57,210 @@ const data = {
   teams: [
     {
       name: "小学",
-      logo: GalleryVerticalEnd, // 小学使用图标
-      plan: "拂堤杨柳醉春烟", // 描述诗句
+      logo: GalleryVerticalEnd,
+      plan: "拂堤杨柳醉春烟",
     },
     {
       name: "初中",
-      logo: BookOpen, // 初中使用书本图标
+      logo: BookOpen,
       plan: "长风破浪会有时",
     },
     {
       name: "高中",
-      logo: Command, // 高中使用命令图标
+      logo: Command,
       plan: "海内存知己，天涯若比邻。",
     },
     {
       name: "大学",
-      logo: AudioWaveform, // 大学使用音频波形图标
+      logo: AudioWaveform,
       plan: "鸢飞戾天者，望峰息心。",
     },
   ],
   navMain: [
     {
-      title: "课程管理",
+      title: "科举总览",
       url: "#",
       icon: BookOpen,
       isActive: true,
       items: [
         {
-          title: "所有课程",
+          title: "科举制度简介",
           url: "#",
         },
         {
-          title: "添加课程",
+          title: "科举考试流程",
           url: "#",
         },
         {
-          title: "课程分类",
+          title: "科举考试历史",
           url: "#",
         },
       ],
     },
     {
-      title: "学生管理",
+      title: "蒙学",
+      url: "#",
+      icon: BookOpen,
+      isActive: false,
+      items: [
+        {
+          title: "三字经",
+          url: "#",
+        },
+        {
+          title: "千字文",
+          url: "#",
+        },
+        {
+          title: "论语",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "童试（童生）",
       url: "#",
       icon: Bot,
+      isActive: false,
       items: [
         {
-          title: "学生列表",
+          title: "大学",
           url: "#",
         },
         {
-          title: "绩效分析",
+          title: "中庸",
           url: "#",
         },
         {
-          title: "通知与通讯",
+          title: "论语",
+          url: "#",
+        },
+        {
+          title: "孟子",
           url: "#",
         },
       ],
     },
     {
-      title: "教学资源",
+      title: "乡试（秀才）",
+      url: "#",
+      icon: Bot,
+      isActive: false,
+      items: [
+        {
+          title: "古文观止",
+          url: "#",
+        },
+        {
+          title: "诗经",
+          url: "#",
+        },
+        {
+          title: "楚辞",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "会试（举人）",
+      url: "#",
+      icon: Bot,
+      isActive: false,
+      items: [
+        {
+          title: "论说文写作",
+          url: "#",
+        },
+        {
+          title: "时事政治",
+          url: "#",
+        },
+        {
+          title: "作诗技巧",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "殿试（进士）",
+      url: "#",
+      icon: Bot,
+      isActive: false,
+      items: [
+        {
+          title: "礼仪法律",
+          url: "#",
+        },
+        {
+          title: "时事分析",
+          url: "#",
+        },
+        {
+          title: "策论写作",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "成绩查询",
       url: "#",
       icon: GalleryVerticalEnd,
+      isActive: false,
       items: [
         {
-          title: "教材下载",
+          title: "历年考生成绩",
           url: "#",
         },
         {
-          title: "试卷与练习",
+          title: "考试题库",
           url: "#",
         },
         {
-          title: "多媒体资料",
+          title: "考试复习资源",
           url: "#",
         },
       ],
     },
     {
-      title: "账户设置",
+      title: "学习资源",
       url: "#",
       icon: Settings2,
+      isActive: false,
+      items: [
+        {
+          title: "经书与经典",
+          url: "#",
+        },
+        {
+          title: "科举专题讲座",
+          url: "#",
+        },
+        {
+          title: "学习指导",
+          url: "#",
+        },
+        {
+          title: "模拟考试",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "个人中心",
+      url: "#",
+      icon: Settings2,
+      isActive: false,
       items: [
         {
           title: "个人信息",
           url: "#",
         },
         {
-          title: "权限管理",
+          title: "历年报考信息",
           url: "#",
         },
         {
-          title: "支付设置",
-          url: "#",
-        },
-        {
-          title: "使用情况",
+          title: "反馈与建议",
           url: "#",
         },
       ],
@@ -162,25 +268,32 @@ const data = {
   ],
   projects: [
     {
-      name: "在线教学平台",
+      name: "在线科举学习平台",
       url: "#",
       icon: Frame,
     },
     {
-      name: "学生互动论坛",
+      name: "科举考试模拟系统",
       url: "#",
       icon: PieChart,
     },
     {
-      name: "学习进度追踪",
+      name: "科举考试资源中心",
       url: "#",
       icon: Map,
     },
   ],
-};
+});
+
 const activeTeam = ref(data.teams[0]);
 
 function setActiveTeam(team) {
   activeTeam.value = team;
+}
+
+function toggleActive(currentItem) {
+  data.navMain.forEach((item) => {
+    item.isActive = item.title !== currentItem.title ? false : item.isActive;
+  });
 }
 </script>

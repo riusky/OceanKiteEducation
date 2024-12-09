@@ -95,7 +95,7 @@ const mode = useColorMode();
       </div>
     </div>
     <div class="space-y-1.5 pt-2">
-      <Label for="theme" class="text-xs"> t("Setting.Language") </Label>
+      <Label for="theme" class="text-xs">{{ t("Setting.Language") }} </Label>
 
       <div class="flex space-x-2 py-1.5">
         <Button

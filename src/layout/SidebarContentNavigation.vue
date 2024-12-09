@@ -6,12 +6,13 @@
         <Collapsible
           v-for="item in navMain"
           :key="item.title"
+          v-model:open="item.isActive"
           as-child
           :default-open="item.isActive"
           class="group/collapsible"
         >
           <SidebarMenuItem>
-            <CollapsibleTrigger as-child>
+            <CollapsibleTrigger as-child @click="toggleActive(item)">
               <SidebarMenuButton :tooltip="item.title">
                 <component :is="item.icon" />
                 <span>{{ item.title }}</span>
@@ -87,4 +88,12 @@ const props = defineProps<{
   navMain: NavItem[];
   projects: Project[];
 }>();
+
+const emit = defineEmits<{
+  (e: "toggle-active", currentItem: NavItem): void;
+}>();
+
+const toggleActive = (currentItem: NavItem) => {
+  emit("toggle-active", currentItem);
+};
 </script>
