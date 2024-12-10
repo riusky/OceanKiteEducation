@@ -1,19 +1,16 @@
 import { $t } from "@/plugins/i18n";
-const Layout = () => import("@/layout/index.vue");
 
 export default {
-  path: "/",
-  name: "Home",
-  redirect: "/ancientCulture",
-  component: Layout,
+  path: "/ancientCulture",
+  redirect: "/ancientCulture/initiate",
   meta: {
-    title: $t("menus.pureHome"),
-    rank: 0,
+    icon: "ri:artboard-line",
+    title: $t("dicom.dicom"),
   },
   children: [
     {
-      path: "/ancientCulture",
-      name: "ancientCulture",
+      path: "/ancientCulture/initiate",
+      name: "FrameBoard",
       component: () => import("@/views/dicom/index2.vue"),
       meta: {
         title: $t("dicom.dicom"),

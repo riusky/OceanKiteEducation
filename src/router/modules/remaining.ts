@@ -3,7 +3,8 @@ import { $t } from "@/plugins/i18n";
 export default [
   {
     path: "/dicom",
-    redirect: "/worklist",
+    // redirect: "/worklist",
+    name: "RIU",
     meta: {
       title: $t("status.pureLoad"),
       showLink: false,

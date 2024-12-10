@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, toRaw } from "vue";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import {
   XCircleIcon,
@@ -117,6 +117,10 @@ import { useConfigStore } from "@/store/config";
 import { LanguageIcon } from "@heroicons/vue/24/solid";
 import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
 const { t, locale, translationCh, translationEn } = useTranslationLang();
+import { transformI18n } from "@/plugins/i18n";
+import { useRoute, useRouter } from "vue-router";
+import { getParentPaths, findRouteByPath } from "@/router/utils";
+import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 // 窗口操作
 const appWindow = getCurrentWindow();
 const isMaximized = ref(false);
@@ -137,8 +141,65 @@ const allColors: Color[] = [
   "violet",
 ];
 
+const route = useRoute();
+const levelList = ref([]);
+const router = useRouter();
+const routes: any = router.options.routes;
+const multiTags: any = useMultiTagsStoreHook().multiTags;
+
+const getBreadcrumb = (): void => {
+  // 当前路由信息
+  let currentRoute;
+
+  currentRoute = findRouteByPath(router.currentRoute.value.path, routes);
+
+  // 当前路由的父级路径组成的数组
+  const parentRoutes = getParentPaths(
+    router.currentRoute.value.name as string,
+    routes,
+    "name",
+  );
+  // 存放组成面包屑的数组
+  const matched = [];
+
+  // 获取每个父级路径对应的路由信息
+  parentRoutes.forEach((path) => {
+    if (path !== "/") matched.push(findRouteByPath(path, routes));
+  });
+
+  matched.push(currentRoute);
+
+  matched.forEach((item, index) => {
+    if (currentRoute?.query || currentRoute?.params) return;
+    if (item?.children) {
+      item.children.forEach((v) => {
+        if (v?.meta?.title === item?.meta?.title) {
+          matched.splice(index, 1);
+        }
+      });
+    }
+  });
+
+  levelList.value = matched.filter(
+    (item) => item?.meta && item?.meta.title !== false,
+  );
+  console.log("currentRoute", currentRoute);
+  console.log("levelList", levelList);
+};
+
+watch(
+  () => route.path,
+  () => {
+    getBreadcrumb();
+  },
+  {
+    deep: true,
+  },
+);
+
 // 初始化窗口状态
 onMounted(() => {
+  getBreadcrumb();
   appWindow.isMaximized().then((maximized) => {
     isMaximized.value = maximized;
   });

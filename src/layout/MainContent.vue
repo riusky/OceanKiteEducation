@@ -1,11 +1,6 @@
 <template>
-  <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-    <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-      <div class="aspect-video rounded-xl bg-muted/50" />
-      <div class="aspect-video rounded-xl bg-muted/50" />
-      <div class="aspect-video rounded-xl bg-muted/50" />
-    </div>
-    <div class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+  <div class="main-content-container">
+    <RouterView />
   </div>
 </template>
 
@@ -14,5 +9,10 @@
 </script>
 
 <style scoped>
-/* 添加针对 MainContent 特定的样式 */
+.main-content-container {
+  box-sizing: border-box; /* 确保 padding 不影响整体尺寸 */
+  display: flex;
+  height: calc(100vh - 64px); /* 确保该区域撑满父容器 */
+  overflow-y: auto; /* 允许纵向滚动 */
+}
 </style>
