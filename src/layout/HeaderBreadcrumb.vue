@@ -9,7 +9,7 @@
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem class="hidden md:block">
-            <BreadcrumbLink href="#">课程管理</BreadcrumbLink>
+            <BreadcrumbLink>课程管理</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator class="hidden md:block" />
           <BreadcrumbItem>

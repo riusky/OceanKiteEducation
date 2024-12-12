@@ -28,9 +28,9 @@
                   :key="subItem.title"
                 >
                   <SidebarMenuSubButton as-child>
-                    <a :href="subItem.url"
-                      ><span>{{ subItem.title }}</span></a
-                    >
+                    <RouterLink :to="subItem.url">
+                      <span>{{ subItem.title }}</span>
+                    </RouterLink>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               </SidebarMenuSub>

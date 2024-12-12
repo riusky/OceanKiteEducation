@@ -47,5 +47,11 @@ Setting:
   Color: Color
 
 AncientCulture:
-  index: 国学
-  initiate: 蒙学
+  index: Culture
+  initiate: Classics
+  hundredSchools: Schools of Thought
+  fourBooksFiveClassics: Four Books & Five Classics
+  literaryClassics: Literary Works
+  twentyFourHistories: 24 Histories
+  classicalNovels: Classic Novels
+  fourLibrary: Four Libraries

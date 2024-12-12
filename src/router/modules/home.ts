@@ -10,14 +10,4 @@ export default {
     title: $t("menus.pureHome"),
     rank: 0,
   },
-  children: [
-    {
-      path: "/ancientCulture",
-      name: "ancientCulture",
-      component: () => import("@/views/dicom/index2.vue"),
-      meta: {
-        title: $t("dicom.dicom"),
-      },
-    },
-  ],
 } satisfies RouteConfigsTable;

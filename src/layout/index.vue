@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <template>
   <SidebarProvider>
     <Sidebar collapsible="icon">
@@ -56,17 +57,17 @@ const data = reactive({
   },
   teams: [
     {
-      name: "小学",
+      name: "国学",
       logo: GalleryVerticalEnd,
       plan: "拂堤杨柳醉春烟",
     },
     {
-      name: "初中",
+      name: "现学",
       logo: BookOpen,
       plan: "长风破浪会有时",
     },
     {
-      name: "高中",
+      name: "大学",
       logo: Command,
       plan: "海内存知己，天涯若比邻。",
     },
@@ -78,189 +79,269 @@ const data = reactive({
   ],
   navMain: [
     {
-      title: "科举总览",
-      url: "#",
+      title: "国学启蒙",
+      url: "/ancientCulture/initiate",
       icon: BookOpen,
       isActive: true,
       items: [
         {
-          title: "科举制度简介",
+          title: "启蒙篇",
           url: "#",
         },
         {
-          title: "科举考试流程",
+          title: "训诫篇",
           url: "#",
         },
         {
-          title: "科举考试历史",
+          title: "诗歌篇",
+          url: "#",
+        },
+        {
+          title: "典故篇",
           url: "#",
         },
       ],
     },
     {
-      title: "蒙学",
-      url: "#",
+      title: "诸子百家",
+      url: "/ancientCulture/hundredSchools",
       icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "三字经",
+          title: "诸子",
           url: "#",
         },
         {
-          title: "千字文",
-          url: "#",
-        },
-        {
-          title: "论语",
+          title: "百家",
           url: "#",
         },
       ],
     },
     {
-      title: "童试（童生）",
-      url: "#",
-      icon: Bot,
+      title: "四书五经",
+      url: "/ancientCulture/fourBooksFiveClassics",
+      icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "大学",
+          title: "四书",
           url: "#",
         },
         {
-          title: "中庸",
-          url: "#",
-        },
-        {
-          title: "论语",
-          url: "#",
-        },
-        {
-          title: "孟子",
+          title: "五经",
           url: "#",
         },
       ],
     },
     {
-      title: "乡试（秀才）",
-      url: "#",
-      icon: Bot,
+      title: "文学名著",
+      url: "/ancientCulture/literaryClassics",
+      icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "古文观止",
+          title: "红楼梦",
           url: "#",
         },
         {
-          title: "诗经",
+          title: "西游记",
           url: "#",
         },
         {
-          title: "楚辞",
+          title: "水浒传",
+          url: "#",
+        },
+        {
+          title: "三国演义",
+          url: "#",
+        },
+        {
+          title: "聊斋志异",
+          url: "#",
+        },
+        {
+          title: "喻世明言",
+          url: "#",
+        },
+        {
+          title: "警世通言",
+          url: "#",
+        },
+        {
+          title: "醒世恒言",
+          url: "#",
+        },
+        {
+          title: "初刻拍案惊奇",
+          url: "#",
+        },
+        {
+          title: "二刻拍案惊奇",
           url: "#",
         },
       ],
     },
     {
-      title: "会试（举人）",
-      url: "#",
-      icon: Bot,
+      title: "二十四史",
+      url: "/ancientCulture/twentyFourHistories",
+      icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "论说文写作",
+          title: "史记",
           url: "#",
         },
         {
-          title: "时事政治",
+          title: "汉书",
           url: "#",
         },
         {
-          title: "作诗技巧",
+          title: "后汉书",
+          url: "#",
+        },
+        {
+          title: "三国志",
+          url: "#",
+        },
+        {
+          title: "晋书",
+          url: "#",
+        },
+        {
+          title: "宋书",
+          url: "#",
+        },
+        {
+          title: "南齐书",
+          url: "#",
+        },
+        {
+          title: "梁书",
+          url: "#",
+        },
+        {
+          title: "陈书",
+          url: "#",
+        },
+        {
+          title: "魏书",
+          url: "#",
+        },
+        {
+          title: "北齐书",
+          url: "#",
+        },
+        {
+          title: "周书",
+          url: "#",
+        },
+        {
+          title: "隋书",
+          url: "#",
+        },
+        {
+          title: "南史",
+          url: "#",
+        },
+        {
+          title: "北史",
+          url: "#",
+        },
+        {
+          title: "旧唐书",
+          url: "#",
+        },
+        {
+          title: "新唐书",
+          url: "#",
+        },
+        {
+          title: "旧五代史",
+          url: "#",
+        },
+        {
+          title: "新五代史",
+          url: "#",
+        },
+        {
+          title: "宋史",
+          url: "#",
+        },
+        {
+          title: "辽史",
+          url: "#",
+        },
+        {
+          title: "金史",
+          url: "#",
+        },
+        {
+          title: "元史",
+          url: "#",
+        },
+        {
+          title: "明史",
           url: "#",
         },
       ],
     },
     {
-      title: "殿试（进士）",
-      url: "#",
-      icon: Bot,
+      title: "古典小说",
+      url: "/ancientCulture/classicalNovels",
+      icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "礼仪法律",
+          title: "才子佳人",
           url: "#",
         },
         {
-          title: "时事分析",
+          title: "谴责讽世",
           url: "#",
         },
         {
-          title: "策论写作",
+          title: "神魔志怪",
+          url: "#",
+        },
+        {
+          title: "古典侠义",
+          url: "#",
+        },
+        {
+          title: "历史演义",
+          url: "#",
+        },
+        {
+          title: "公案小说",
+          url: "#",
+        },
+        {
+          title: "笔记小说",
           url: "#",
         },
       ],
     },
     {
-      title: "成绩查询",
-      url: "#",
-      icon: GalleryVerticalEnd,
+      title: "四库全书",
+      url: "/ancientCulture/fourLibrary",
+      icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "历年考生成绩",
+          title: "经部",
           url: "#",
         },
         {
-          title: "考试题库",
+          title: "史部",
           url: "#",
         },
         {
-          title: "考试复习资源",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "学习资源",
-      url: "#",
-      icon: Settings2,
-      isActive: false,
-      items: [
-        {
-          title: "经书与经典",
+          title: "子部",
           url: "#",
         },
         {
-          title: "科举专题讲座",
-          url: "#",
-        },
-        {
-          title: "学习指导",
-          url: "#",
-        },
-        {
-          title: "模拟考试",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "个人中心",
-      url: "#",
-      icon: Settings2,
-      isActive: false,
-      items: [
-        {
-          title: "个人信息",
-          url: "#",
-        },
-        {
-          title: "历年报考信息",
-          url: "#",
-        },
-        {
-          title: "反馈与建议",
+          title: "集部",
           url: "#",
         },
       ],
