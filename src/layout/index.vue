@@ -57,22 +57,42 @@ const data = reactive({
   },
   teams: [
     {
+      name: "首页",
+      logo: GalleryVerticalEnd,
+      plan: "拂堤杨柳醉春烟",
+    },
+    {
       name: "国学",
       logo: GalleryVerticalEnd,
       plan: "拂堤杨柳醉春烟",
     },
     {
-      name: "现学",
-      logo: BookOpen,
-      plan: "长风破浪会有时",
+      name: "现代教育",
+      logo: GalleryVerticalEnd,
+      plan: "拂堤杨柳醉春烟",
     },
     {
       name: "大学",
-      logo: Command,
-      plan: "海内存知己，天涯若比邻。",
+      logo: AudioWaveform,
+      plan: "鸢飞戾天者，望峰息心。",
     },
     {
-      name: "大学",
+      name: "职业",
+      logo: AudioWaveform,
+      plan: "鸢飞戾天者，望峰息心。",
+    },
+    {
+      name: "工具",
+      logo: AudioWaveform,
+      plan: "鸢飞戾天者，望峰息心。",
+    },
+    {
+      name: "资讯",
+      logo: AudioWaveform,
+      plan: "鸢飞戾天者，望峰息心。",
+    },
+    {
+      name: "道场",
       logo: AudioWaveform,
       plan: "鸢飞戾天者，望峰息心。",
     },
@@ -85,19 +105,11 @@ const data = reactive({
       isActive: true,
       items: [
         {
-          title: "启蒙篇",
+          title: "启蒙",
           url: "#",
         },
         {
-          title: "训诫篇",
-          url: "#",
-        },
-        {
-          title: "诗歌篇",
-          url: "#",
-        },
-        {
-          title: "典故篇",
+          title: "声律",
           url: "#",
         },
       ],

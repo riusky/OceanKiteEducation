@@ -92,6 +92,7 @@ provideSidebarContext({
           props.class,
         )
       "
+      v-bind="$attrs"
     >
       <slot />
     </div>
