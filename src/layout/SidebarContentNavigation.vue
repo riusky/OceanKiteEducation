@@ -66,7 +66,6 @@ import { ChevronRight } from "lucide-vue-next";
 
 interface NavItem {
   title: string;
-  url: string;
   icon: any;
   isActive?: boolean;
   items?: SubNavItem[];
