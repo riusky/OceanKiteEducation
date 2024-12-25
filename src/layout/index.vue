@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import SidebarHeaderNavigation from "./SidebarHeaderNavigation.vue";
 import SidebarContentNavigation from "./SidebarContentNavigation.vue";
 import SidebarFooterUserMenu from "./SidebarFooterUserMenu.vue";
@@ -81,13 +81,16 @@ const data = reactive({
 });
 
 const activeTeam = ref(data.teams[0]);
+onMounted(() => {
+  activeNavMain.value = navigation[teams[0].key];
+});
 
 function setActiveTeam(team) {
+  activeNavMain.value = navigation[team.key];
   activeTeam.value = team;
 }
 
 function toggleActive(currentItem) {
-  activeNavMain.value = navigation[currentItem.key];
   data.navMain.forEach((item) => {
     item.isActive = item.title !== currentItem.title ? false : item.isActive;
   });
