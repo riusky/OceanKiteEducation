@@ -13,7 +13,10 @@
         >
           <SidebarMenuItem>
             <CollapsibleTrigger as-child @click="toggleActive(item)">
-              <SidebarMenuButton :tooltip="item.title">
+              <SidebarMenuButton
+                :tooltip="item.title"
+                :isActive="item.isActive"
+              >
                 <component :is="item.icon" />
                 <span>{{ item.title }}</span>
                 <ChevronRight
@@ -27,7 +30,11 @@
                   v-for="subItem in item.items"
                   :key="subItem.title"
                 >
-                  <SidebarMenuSubButton as-child>
+                  <SidebarMenuSubButton
+                    as-child
+                    :isActive="subItem.isActive"
+                    @click="toggleSubActive(subItem, item)"
+                  >
                     <RouterLink :to="subItem.url">
                       <span>{{ subItem.title }}</span>
                     </RouterLink>
@@ -74,6 +81,7 @@ interface NavItem {
 interface SubNavItem {
   title: string;
   url: string;
+  isActive?: boolean;
 }
 
 // 定义项目类型
@@ -94,5 +102,15 @@ const emit = defineEmits<{
 
 const toggleActive = (currentItem: NavItem) => {
   emit("toggle-active", currentItem);
+};
+
+const toggleSubActive = (currentItem: SubNavItem, item: NavItem) => {
+  // 将 item.items 中的所有元素的 isActive 设置为 false
+  item.items.forEach((subItem) => {
+    subItem.isActive = false;
+  });
+
+  // 将当前项设置为激活状态
+  currentItem.isActive = true;
 };
 </script>

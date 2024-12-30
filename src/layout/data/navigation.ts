@@ -27,6 +27,7 @@ export const navigation = {
       items: [
         {
           title: "启蒙",
+          isActive: true,
           url: "/ancientCulture/initiate",
         },
         {
@@ -42,6 +43,7 @@ export const navigation = {
       items: [
         {
           title: "诸子",
+          isActive: true,
           url: "/ancientCulture/hundredSchools",
         },
         {
@@ -57,6 +59,7 @@ export const navigation = {
       items: [
         {
           title: "四书",
+          isActive: true,
           url: "/ancientCulture/fourBooksFiveClassics",
         },
         {
@@ -72,6 +75,7 @@ export const navigation = {
       items: [
         {
           title: "红楼梦",
+          isActive: true,
           url: "/ancientCulture/literaryClassics",
         },
         {
@@ -119,6 +123,7 @@ export const navigation = {
       items: [
         {
           title: "史记",
+          isActive: true,
           url: "/ancientCulture/twentyFourHistories",
         },
         {
@@ -222,6 +227,7 @@ export const navigation = {
       items: [
         {
           title: "才子佳人",
+          isActive: true,
           url: "/ancientCulture/classicalNovels",
         },
         {
@@ -257,6 +263,7 @@ export const navigation = {
       items: [
         {
           title: "经部",
+          isActive: true,
           url: "/ancientCulture/fourLibrary",
         },
         {

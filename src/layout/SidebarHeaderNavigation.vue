@@ -83,6 +83,8 @@ import { Plus, ChevronsUpDown } from "lucide-vue-next";
 // 定义团队类型
 interface Team {
   name: string;
+  key: string;
+  url: string;
   logo: any; // 根据实际类型替换
   plan: string;
 }

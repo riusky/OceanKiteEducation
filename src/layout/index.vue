@@ -11,6 +11,7 @@
         :nav-main="data.navMain"
         :projects="data.projects"
         @toggleActive="toggleActive"
+        @toggleSubActive="toggleSubActive"
       />
       <SidebarFooterUserMenu :user="data.user" />
       <SidebarRail />
@@ -91,6 +92,12 @@ function setActiveTeam(team) {
 }
 
 function toggleActive(currentItem) {
+  data.navMain.forEach((item) => {
+    item.isActive = item.title !== currentItem.title ? false : item.isActive;
+  });
+}
+
+function toggleSubActive(currentItem) {
   data.navMain.forEach((item) => {
     item.isActive = item.title !== currentItem.title ? false : item.isActive;
   });
