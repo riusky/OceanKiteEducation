@@ -9,11 +9,15 @@
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem class="hidden md:block">
-            <BreadcrumbLink>课程管理</BreadcrumbLink>
+            <BreadcrumbLink>{{
+              transformI18n(levelList[0]?.meta.title)
+            }}</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator class="hidden md:block" />
           <BreadcrumbItem>
-            <BreadcrumbPage>所有课程</BreadcrumbPage>
+            <BreadcrumbPage>{{
+              transformI18n(currentRoute.meta.title)
+            }}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -121,6 +125,20 @@ import { transformI18n } from "@/plugins/i18n";
 import { useRoute, useRouter } from "vue-router";
 import { getParentPaths, findRouteByPath } from "@/router/utils";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
+
+interface Route {
+  path: string;
+  name: string;
+  meta?: {
+    title: string;
+  };
+  query?: Record<string, any>;
+  params?: Record<string, any>;
+  id?: number;
+  parentId?: number;
+  pathList?: number[];
+}
+
 // 窗口操作
 const appWindow = getCurrentWindow();
 const isMaximized = ref(false);
@@ -142,16 +160,21 @@ const allColors: Color[] = [
 ];
 
 const route = useRoute();
-const levelList = ref([]);
+const levelList = ref<Route[]>([]); // 定义为响应式数组
 const router = useRouter();
 const routes: any = router.options.routes;
 const multiTags: any = useMultiTagsStoreHook().multiTags;
+const currentRoute = ref<Route>({
+  path: "",
+  name: "",
+  meta: {
+    title: "",
+  },
+});
 
 const getBreadcrumb = (): void => {
   // 当前路由信息
-  let currentRoute;
-
-  currentRoute = findRouteByPath(router.currentRoute.value.path, routes);
+  currentRoute.value = findRouteByPath(router.currentRoute.value.path, routes);
 
   // 当前路由的父级路径组成的数组
   const parentRoutes = getParentPaths(
@@ -170,7 +193,7 @@ const getBreadcrumb = (): void => {
   matched.push(currentRoute);
 
   matched.forEach((item, index) => {
-    if (currentRoute?.query || currentRoute?.params) return;
+    if (currentRoute.value?.query || currentRoute.value?.params) return;
     if (item?.children) {
       item.children.forEach((v) => {
         if (v?.meta?.title === item?.meta?.title) {
@@ -183,8 +206,7 @@ const getBreadcrumb = (): void => {
   levelList.value = matched.filter(
     (item) => item?.meta && item?.meta.title !== false,
   );
-  console.log("currentRoute", currentRoute);
-  console.log("levelList", levelList);
+  console.log("levelList", levelList.value[0]);
 };
 
 watch(

@@ -1,24 +1,6 @@
 import { BookOpen } from "lucide-vue-next";
 
 export const navigation = {
-  home: [
-    {
-      title: "国学启蒙",
-      icon: BookOpen,
-      isActive: true,
-      key: "home",
-      items: [
-        {
-          title: "启蒙",
-          url: "/ancientCulture/initiate",
-        },
-        {
-          title: "声律",
-          url: "/ancientCulture/initiate",
-        },
-      ],
-    },
-  ],
   initiate: [
     {
       title: "国学启蒙",
@@ -26,13 +8,13 @@ export const navigation = {
       isActive: true,
       items: [
         {
-          title: "启蒙",
+          title: "蒙学",
           isActive: true,
           url: "/ancientCulture/initiate",
         },
         {
           title: "声律",
-          url: "/ancientCulture/initiate",
+          url: "/ancientCulture/temperament",
         },
       ],
     },
@@ -44,11 +26,11 @@ export const navigation = {
         {
           title: "诸子",
           isActive: true,
-          url: "/ancientCulture/hundredSchools",
+          url: "/ancientCulture/zhuZi",
         },
         {
           title: "百家",
-          url: "/ancientCulture/hundredSchools",
+          url: "/ancientCulture/baiJia",
         },
       ],
     },
@@ -60,11 +42,11 @@ export const navigation = {
         {
           title: "四书",
           isActive: true,
-          url: "/ancientCulture/fourBooksFiveClassics",
+          url: "/ancientCulture/fourBooks",
         },
         {
           title: "五经",
-          url: "/ancientCulture/fourBooksFiveClassics",
+          url: "/ancientCulture/fiveClassics",
         },
       ],
     },
@@ -76,43 +58,43 @@ export const navigation = {
         {
           title: "红楼梦",
           isActive: true,
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/redChamberDream",
         },
         {
           title: "西游记",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/journeyToTheWest",
         },
         {
           title: "水浒传",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/waterMargin",
         },
         {
           title: "三国演义",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/romanceOfThreeKingdoms",
         },
         {
           title: "聊斋志异",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/talesOfLiaozhai",
         },
         {
           title: "喻世明言",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/wordsOfWarning",
         },
         {
           title: "警世通言",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/wordsOfCaution",
         },
         {
           title: "醒世恒言",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/constantWordsOfAwakening",
         },
         {
           title: "初刻拍案惊奇",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/firstCaseSurprise",
         },
         {
           title: "二刻拍案惊奇",
-          url: "/ancientCulture/literaryClassics",
+          url: "/ancientCulture/secondCaseSurprise",
         },
       ],
     },
@@ -124,99 +106,99 @@ export const navigation = {
         {
           title: "史记",
           isActive: true,
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/recordsOfTheGrandHistorian",
         },
         {
           title: "汉书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfHan",
         },
         {
           title: "后汉书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfLaterHan",
         },
         {
           title: "三国志",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/recordsOfTheThreeKingdoms",
         },
         {
           title: "晋书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfJin",
         },
         {
           title: "宋书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfSong",
         },
         {
           title: "南齐书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfSouthernQi",
         },
         {
           title: "梁书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfLiang",
         },
         {
           title: "陈书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfChen",
         },
         {
           title: "魏书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfWei",
         },
         {
           title: "北齐书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfNorthernQi",
         },
         {
           title: "周书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfZhou",
         },
         {
           title: "隋书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/bookOfSui",
         },
         {
           title: "南史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/southernHistory",
         },
         {
           title: "北史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/northernHistory",
         },
         {
           title: "旧唐书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/oldTangBook",
         },
         {
           title: "新唐书",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/newTangBook",
         },
         {
           title: "旧五代史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/oldFiveDynastiesHistory",
         },
         {
           title: "新五代史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/newFiveDynastiesHistory",
         },
         {
           title: "宋史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/songHistory",
         },
         {
           title: "辽史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/liaoHistory",
         },
         {
           title: "金史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/jinHistory",
         },
         {
           title: "元史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/yuanHistory",
         },
         {
           title: "明史",
-          url: "/ancientCulture/twentyFourHistories",
+          url: "/ancientCulture/mingHistory",
         },
       ],
     },
@@ -228,31 +210,31 @@ export const navigation = {
         {
           title: "才子佳人",
           isActive: true,
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/talentAndBeauty",
         },
         {
           title: "谴责讽世",
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/socialSatire",
         },
         {
           title: "神魔志怪",
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/fantasyAndMagic",
         },
         {
           title: "古典侠义",
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/classicChivalry",
         },
         {
           title: "历史演义",
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/historicalNovel",
         },
         {
           title: "公案小说",
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/legalNovel",
         },
         {
           title: "笔记小说",
-          url: "/ancientCulture/classicalNovels",
+          url: "/ancientCulture/noteNovel",
         },
       ],
     },
@@ -264,19 +246,19 @@ export const navigation = {
         {
           title: "经部",
           isActive: true,
-          url: "/ancientCulture/fourLibrary",
+          url: "/ancientCulture/classicsSection",
         },
         {
           title: "史部",
-          url: "/ancientCulture/fourLibrary",
+          url: "/ancientCulture/historySection",
         },
         {
           title: "子部",
-          url: "/ancientCulture/fourLibrary",
+          url: "/ancientCulture/ziSection",
         },
         {
           title: "集部",
-          url: "/ancientCulture/fourLibrary",
+          url: "/ancientCulture/collectionSection",
         },
       ],
     },

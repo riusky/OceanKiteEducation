@@ -45,11 +45,60 @@ Setting:
   Color: 色彩
 
 AncientCulture:
-  index: 国学
+  index: 国学启蒙
   initiate: 蒙学
+  temperament: 声律
   hundredSchools: 诸子百家
-  fourBooksFiveClassics: 四书五经
+  zhuZi: 诸子
+  baiJia: 百家
+  fourBooks: 四书
+  fiveClassics: 五经
   literaryClassics: 文学名著
+  redChamberDream: 红楼梦
+  journeyToTheWest: 西游记
+  waterMargin: 水浒传
+  romanceOfThreeKingdoms: 三国演义
+  talesOfLiaozhai: 聊斋志异
+  wordsOfWarning: 喻世明言
+  wordsOfCaution: 警世通言
+  constantWordsOfAwakening: 醒世恒言
+  firstCaseSurprise: 初刻拍案惊奇
+  secondCaseSurprise: 二刻拍案惊奇
   twentyFourHistories: 二十四史
+  recordsOfTheGrandHistorian: 史记
+  bookOfHan: 汉书
+  bookOfLaterHan: 后汉书
+  recordsOfTheThreeKingdoms: 三国志
+  bookOfJin: 晋书
+  bookOfSong: 宋书
+  bookOfSouthernQi: 南齐书
+  bookOfLiang: 梁书
+  bookOfChen: 陈书
+  bookOfWei: 魏书
+  bookOfNorthernQi: 北齐书
+  bookOfZhou: 周书
+  bookOfSui: 隋书
+  southernHistory: 南史
+  northernHistory: 北史
+  oldTangBook: 旧唐书
+  newTangBook: 新唐书
+  oldFiveDynastiesHistory: 旧五代史
+  newFiveDynastiesHistory: 新五代史
+  songHistory: 宋史
+  liaoHistory: 辽史
+  jinHistory: 金史
+  yuanHistory: 元史
+  mingHistory: 明史
   classicalNovels: 古典小说
+  talentAndBeauty: 才子佳人
+  socialSatire: 谴责讽世
+  fantasyAndMagic: 神魔志怪
+  classicChivalry: 古典侠义
+  historicalNovel: 历史演义
+  legalNovel: 公案小说
+  noteNovel: 笔记小说
   fourLibrary: 四库全书
+  classicsSection: 经部
+  historySection: 史部
+  ziSection: 子部
+  collectionSection: 集部

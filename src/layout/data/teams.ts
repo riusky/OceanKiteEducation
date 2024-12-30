@@ -1,13 +1,6 @@
 import { AudioWaveform, GalleryVerticalEnd } from "lucide-vue-next";
 export const teams = [
   {
-    name: "首页",
-    url: "home",
-    key: "home",
-    logo: GalleryVerticalEnd,
-    plan: "拂堤杨柳醉春烟",
-  },
-  {
     name: "国学",
     url: "initiate",
     key: "initiate",

@@ -47,11 +47,60 @@ Setting:
   Color: Color
 
 AncientCulture:
-  index: Culture
-  initiate: Classics
-  hundredSchools: Schools of Thought
-  fourBooksFiveClassics: Four Books & Five Classics
-  literaryClassics: Literary Works
-  twentyFourHistories: 24 Histories
-  classicalNovels: Classic Novels
-  fourLibrary: Four Libraries
+  index: Classical Culture
+  initiate: Enlightenment of Classical Learning
+  temperament: Phonology
+  hundredSchools: Hundred Schools of Thought
+  zhuZi: Masters of Thought
+  baiJia: Schools of Various
+  fourBooks: Four Books
+  fiveClassics: Five Classics
+  literaryClassics: Literary Classics
+  redChamberDream: Dream of the Red Chamber
+  journeyToTheWest: Journey to the West
+  waterMargin: Water Margin
+  romanceOfThreeKingdoms: Romance of the Three Kingdoms
+  talesOfLiaozhai: Strange Tales from a Chinese Studio
+  wordsOfWarning: Words of Warning
+  wordsOfCaution: Words of Caution
+  constantWordsOfAwakening: Constant Words of Awakening
+  firstCaseSurprise: The First Case Surprise
+  secondCaseSurprise: The Second Case Surprise
+  twentyFourHistories: Twenty-Four Histories
+  recordsOfTheGrandHistorian: Records of the Grand Historian
+  bookOfHan: Book of Han
+  bookOfLaterHan: Book of the Later Han
+  recordsOfTheThreeKingdoms: Records of the Three Kingdoms
+  bookOfJin: Book of Jin
+  bookOfSong: Book of Song
+  bookOfSouthernQi: Book of Southern Qi
+  bookOfLiang: Book of Liang
+  bookOfChen: Book of Chen
+  bookOfWei: Book of Wei
+  bookOfNorthernQi: Book of Northern Qi
+  bookOfZhou: Book of Zhou
+  bookOfSui: Book of Sui
+  southernHistory: Southern History
+  northernHistory: Northern History
+  oldTangBook: Old Tang Book
+  newTangBook: New Tang Book
+  oldFiveDynastiesHistory: Old History of the Five Dynasties
+  newFiveDynastiesHistory: New History of the Five Dynasties
+  songHistory: Song History
+  liaoHistory: Liao History
+  jinHistory: Jin History
+  yuanHistory: Yuan History
+  mingHistory: Ming History
+  classicalNovels: Classical Novels
+  talentAndBeauty: Talented Scholars and Beautiful Women
+  socialSatire: Satirical Fiction
+  fantasyAndMagic: Tales of gods and magic
+  classicChivalry: Classic Chivalry
+  historicalNovel: Historical Novel
+  legalNovel: Legal Fiction
+  noteNovel: Notes Fiction
+  fourLibrary: Complete Library of the Four Sections
+  classicsSection: Classics Section
+  historySection: History Section
+  ziSection: Philosophy Section
+  collectionSection: Collection Section
