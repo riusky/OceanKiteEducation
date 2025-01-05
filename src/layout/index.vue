@@ -36,22 +36,14 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-} from "lucide-vue-next";
+import { Frame, Map, PieChart } from "lucide-vue-next";
 import avatar from "@/assets/32x32.png";
 // Import data from TS files
 import { teams } from "@/layout/data/teams";
 import { navigation } from "@/layout/data/navigation";
+import { useRouter } from "vue-router";
 
+const router = useRouter(); // 创建 router 实例
 const activeNavMain = ref([]);
 const data = reactive({
   user: {
@@ -83,16 +75,49 @@ const data = reactive({
 const activeTeam = ref(data.teams[0]);
 onMounted(() => {
   activeNavMain.value = navigation[teams[0].key];
+
+  // 查找 isActive 为 true 的 URL
+  const activeItemUrl = getActiveItemUrl();
+  if (activeItemUrl) {
+    router.push(activeItemUrl); // 跳转到获取到的 URL
+  }
 });
+
+// 获取 activeNavMain 中 items 数组的 isActive URL
+function getActiveItemUrl() {
+  for (const navItem of activeNavMain.value) {
+    // 遍历 navMain
+    const activeItem = navItem.items.find((item) => item.isActive); // 查找 items 中 isActive 为 true 的项
+    if (activeItem) {
+      return activeItem.url; // 返回找到的 URL
+    }
+  }
+  return null; // 如果没有找到返回 null
+}
 
 function setActiveTeam(team) {
   activeNavMain.value = navigation[team.key];
   activeTeam.value = team;
+  // 查找 isActive 为 true 的 URL
+  const activeItemUrl = getActiveItemUrl();
+  if (activeItemUrl) {
+    router.push(activeItemUrl); // 跳转到获取到的 URL
+  }
 }
 
 function toggleActive(currentItem) {
+  console.log(currentItem);
   data.navMain.forEach((item) => {
     item.isActive = item.title !== currentItem.title ? false : item.isActive;
   });
+  // 如果当前项目的 isActive 为 true
+  if (currentItem.isActive) {
+    // 查找 items 数组中第一个 isActive 为 true 的项
+    const activeItem = currentItem.items.find((item) => item.isActive);
+
+    if (activeItem) {
+      router.push(activeItem.url); // 跳转到找到的 URL
+    }
+  }
 }
 </script>
