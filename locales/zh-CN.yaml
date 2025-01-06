@@ -102,3 +102,34 @@ AncientCulture:
   historySection: 史部
   ziSection: 子部
   collectionSection: 集部
+
+modernEducation:
+  index: 现代教育
+  primary: 小学
+  middle: 中学
+  high: 高中
+
+
+university:
+  index: 高等数学
+  calculus: 微积分
+  linearAlgebra: 线性代数
+  ordinaryDifferentialEquations: 常微分方程
+  statistics: 统计学
+  solidGeometry: 立体几何
+  complexFunctions: 复变函数
+  softwareDevelopmentBasics: 软件开发基础
+  softwareTestingAndMaintenance: 软件测试与维护
+  agileDevelopment: 敏捷开发
+  databaseSystems: 数据库系统
+  cloudComputing: 云计算
+  classicalMechanics: 经典力学
+  thermodynamics: 热力学
+  quantumMechanics: 量子力学
+  electromagnetism: 电磁学
+  relativity: 相对论
+  organicChemistry: 有机化学
+  inorganicChemistry: 无机化学
+  physicalChemistry: 物理化学
+  analyticalChemistry: 分析化学
+  materialsChemistry: 材料化学

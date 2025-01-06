@@ -16,7 +16,7 @@
       <SidebarRail />
     </Sidebar>
     <SidebarInset>
-      <HeaderBreadcrumb />
+      <HeaderBreadcrumb :current-item="currentItem" />
       <MainContent />
     </SidebarInset>
   </SidebarProvider>
@@ -43,7 +43,8 @@ import { teams } from "@/layout/data/teams";
 import { navigation } from "@/layout/data/navigation";
 import { useRouter } from "vue-router";
 
-const router = useRouter(); // 创建 router 实例
+const router = useRouter();
+let currentItem = reactive(navigation[teams[0].key][0]);
 const activeNavMain = ref([]);
 const data = reactive({
   user: {
@@ -105,15 +106,19 @@ function setActiveTeam(team) {
   }
 }
 
-function toggleActive(currentItem) {
-  console.log(currentItem);
+function toggleActive(selectedItem) {
+  // 直接将 currentItem 设置为 selectedItem
+  currentItem = selectedItem;
+  console.log("currentItem", currentItem);
+  // 处理 navMain 中的 isActive 状态
   data.navMain.forEach((item) => {
-    item.isActive = item.title !== currentItem.title ? false : item.isActive;
+    item.isActive = item.title !== selectedItem.title ? false : item.isActive;
   });
+
   // 如果当前项目的 isActive 为 true
-  if (currentItem.isActive) {
+  if (selectedItem.isActive) {
     // 查找 items 数组中第一个 isActive 为 true 的项
-    const activeItem = currentItem.items.find((item) => item.isActive);
+    const activeItem = selectedItem.items.find((item) => item.isActive);
 
     if (activeItem) {
       router.push(activeItem.url); // 跳转到找到的 URL

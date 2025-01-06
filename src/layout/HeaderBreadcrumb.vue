@@ -9,9 +9,7 @@
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem class="hidden md:block">
-            <BreadcrumbLink>{{
-              transformI18n(levelList[0]?.meta.title)
-            }}</BreadcrumbLink>
+            <BreadcrumbLink>{{ currentItem?.title }}</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator class="hidden md:block" />
           <BreadcrumbItem>
@@ -86,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, toRaw } from "vue";
+import { ref, onMounted, watch, toRaw, defineProps } from "vue";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import {
   XCircleIcon,
@@ -118,13 +116,20 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useConfigStore } from "@/store/config";
-import { LanguageIcon } from "@heroicons/vue/24/solid";
 import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
-const { t, locale, translationCh, translationEn } = useTranslationLang();
+const { t, locale } = useTranslationLang();
 import { transformI18n } from "@/plugins/i18n";
 import { useRoute, useRouter } from "vue-router";
 import { getParentPaths, findRouteByPath } from "@/router/utils";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
+
+// 定义参数
+const props = defineProps({
+  currentItem: {
+    type: Object,
+    required: true,
+  },
+});
 
 interface Route {
   path: string;
@@ -136,7 +141,7 @@ interface Route {
   params?: Record<string, any>;
   id?: number;
   parentId?: number;
-  pathList?: number[];
+  pathList?: number[]; // 可以根据需求制定更详细的类型
 }
 
 // 窗口操作
@@ -160,7 +165,7 @@ const allColors: Color[] = [
 ];
 
 const route = useRoute();
-const levelList = ref<Route[]>([]); // 定义为响应式数组
+const levelList = ref<Route[]>([]);
 const router = useRouter();
 const routes: any = router.options.routes;
 const multiTags: any = useMultiTagsStoreHook().multiTags;
@@ -172,20 +177,19 @@ const currentRoute = ref<Route>({
   },
 });
 
+// 获取面包屑功能
 const getBreadcrumb = (): void => {
   // 当前路由信息
   currentRoute.value = findRouteByPath(router.currentRoute.value.path, routes);
 
-  // 当前路由的父级路径组成的数组
   const parentRoutes = getParentPaths(
     router.currentRoute.value.name as string,
     routes,
     "name",
   );
-  // 存放组成面包屑的数组
+
   const matched = [];
 
-  // 获取每个父级路径对应的路由信息
   parentRoutes.forEach((path) => {
     if (path !== "/") matched.push(findRouteByPath(path, routes));
   });
@@ -206,7 +210,6 @@ const getBreadcrumb = (): void => {
   levelList.value = matched.filter(
     (item) => item?.meta && item?.meta.title !== false,
   );
-  console.log("levelList", levelList.value[0]);
 };
 
 watch(
@@ -251,13 +254,13 @@ function closeWindow() {
 
 const { theme, radius } = useConfigStore();
 
-// Whenever the component is mounted, update the document class list
+// 更新文档的类列表
 onMounted(() => {
   document.documentElement.style.setProperty("--radius", `${radius.value}rem`);
   document.documentElement.classList.add(`theme-${theme.value}`);
 });
 
-// Whenever the theme value changes, update the document class list
+// 监听 theme 和 radius 变化
 watch(theme, (theme) => {
   document.documentElement.classList.remove(
     ...allColors.map((color) => `theme-${color}`),
@@ -265,7 +268,6 @@ watch(theme, (theme) => {
   document.documentElement.classList.add(`theme-${theme}`);
 });
 
-// Whenever the radius value changes, update the document style
 watch(radius, (radius) => {
   document.documentElement.style.setProperty("--radius", `${radius}rem`);
 });

@@ -104,3 +104,33 @@ AncientCulture:
   historySection: History Section
   ziSection: Philosophy Section
   collectionSection: Collection Section
+
+modernEducation:
+  index: modernEducation
+  primary: primary
+  middle: middle
+  high: high
+
+university:
+  index: Higher mathematics
+  calculus: Calculus
+  linearAlgebra: Linear Algebra
+  ordinaryDifferentialEquations: Ordinary Differential Equations
+  statistics: Statistics
+  solidGeometry: Solid Geometry
+  complexFunctions: Complex Functions
+  softwareDevelopmentBasics: Software Development Basics
+  softwareTestingAndMaintenance: Software Testing and Maintenance
+  agileDevelopment: Agile Development
+  databaseSystems: Database Systems
+  cloudComputing: Cloud Computing
+  classicalMechanics: Classical Mechanics
+  thermodynamics: Thermodynamics
+  quantumMechanics: Quantum Mechanics
+  electromagnetism: Electromagnetism
+  relativity: Relativity
+  organicChemistry: Organic Chemistry
+  inorganicChemistry: Inorganic Chemistry
+  physicalChemistry: Physical Chemistry
+  analyticalChemistry: Analytical Chemistry
+  materialsChemistry: Materials Chemistry
