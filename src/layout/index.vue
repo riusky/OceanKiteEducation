@@ -44,7 +44,7 @@ import { navigation } from "@/layout/data/navigation";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-let currentItem = reactive(navigation[teams[0].key][0]);
+const currentItem = ref(navigation[teams[0].key][0]);
 const activeNavMain = ref([]);
 const data = reactive({
   user: {
@@ -99,6 +99,7 @@ function getActiveItemUrl() {
 function setActiveTeam(team) {
   activeNavMain.value = navigation[team.key];
   activeTeam.value = team;
+  currentItem.value = activeNavMain.value[0];
   // 查找 isActive 为 true 的 URL
   const activeItemUrl = getActiveItemUrl();
   if (activeItemUrl) {
@@ -108,8 +109,7 @@ function setActiveTeam(team) {
 
 function toggleActive(selectedItem) {
   // 直接将 currentItem 设置为 selectedItem
-  currentItem = selectedItem;
-  console.log("currentItem", currentItem);
+  currentItem.value = selectedItem;
   // 处理 navMain 中的 isActive 状态
   data.navMain.forEach((item) => {
     item.isActive = item.title !== selectedItem.title ? false : item.isActive;
