@@ -1,41 +1,40 @@
 <template>
   <div class="container flex">
-    <div class="content flex-grow" :style="{ fontSize: fontSize + 'px' }">
-      <h4>三字经内容</h4>
+    <div class="content-wrapper">
+      <div class="header">
+        <h4>《三字经》</h4>
+        <p>宋朝 · 王应麟</p>
+      </div>
 
-      <div
-        v-for="(item, index) in contentList"
-        :key="index"
-        class="content-item"
-      >
-        <div class="main-content">
-          <div class="characters">
-            <div class="full-line">
-              <div class="three-characters">
-                <span
-                  v-for="(char, idx) in item.content"
-                  :key="idx"
-                  class="character"
-                  >{{ char.character }}</span
-                >
-              </div>
-            </div>
-            <div class="three-pinyin">
-              <span
-                v-for="(char, idx) in item.content"
-                :key="idx"
-                class="pinyin"
-                >{{ char.pinyin }}</span
-              >
-            </div>
-          </div>
-        </div>
-
+      <div class="content" :style="{ fontSize: fontSize + 'px' }">
         <div
-          v-if="activeToggle.includes('explanation')"
-          class="explanation-content"
+          v-for="(item, index) in contentList"
+          :key="index"
+          class="content-item"
         >
-          <p class="italic">{{ item.explanation }}</p>
+          <ul class="content-list">
+            <li
+              v-for="(group, groupIndex) in getGroups(item.content)"
+              :key="groupIndex"
+              class="content-item-list"
+            >
+              <span>
+                <span
+                  v-for="(char, charIndex) in group"
+                  :key="charIndex"
+                  class="qzw"
+                >
+                  <i v-if="activeToggle.includes('pinyin')" class="pinyin">{{
+                    char.pinyin
+                  }}</i>
+                  <b class="character">{{ char.character }}</b>
+                </span>
+              </span>
+            </li>
+          </ul>
+          <div v-if="activeToggle.includes('explanation')" class="qzw_yiwen">
+            <p>{{ item.explanation }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -45,8 +44,8 @@
         <Tooltip>
           <TooltipTrigger as-child>
             <Button
-              variant="outline"
-              :class="{ active: activeToggle.includes('pinyin') }"
+              :variant="activeToggle.includes('pinyin') ? 'default' : 'outline'"
+              class="tooltip-button"
               @click="toggleOption('pinyin')"
             >
               显示拼音
@@ -60,8 +59,10 @@
         <Tooltip>
           <TooltipTrigger as-child>
             <Button
-              variant="outline"
-              :class="{ active: activeToggle.includes('explanation') }"
+              :variant="
+                activeToggle.includes('explanation') ? 'default' : 'outline'
+              "
+              class="tooltip-button"
               @click="toggleOption('explanation')"
             >
               显示解释
@@ -74,7 +75,11 @@
 
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button variant="outline" @click="increaseFontSize">
+            <Button
+              variant="outline"
+              class="tooltip-button"
+              @click="increaseFontSize"
+            >
               加大字号
             </Button>
           </TooltipTrigger>
@@ -85,7 +90,11 @@
 
         <Tooltip>
           <TooltipTrigger as-child>
-            <Button variant="outline" @click="decreaseFontSize">
+            <Button
+              variant="outline"
+              class="tooltip-button"
+              @click="decreaseFontSize"
+            >
               减小字号
             </Button>
           </TooltipTrigger>
@@ -108,34 +117,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-// 内容列表
-const contentList = ref([
-  {
-    // 确保每个content都是12个字，并分为4个3字句
-    content: [
-      { pinyin: "gǒu", character: "苟" },
-      { pinyin: "bú", character: "不" },
-      { pinyin: "jiào", character: "教" },
-      { pinyin: "xìng", character: "性" },
-      { pinyin: "nǎi", character: "乃" },
-      { pinyin: "qiān", character: "迁" },
-      { pinyin: "jiào", character: "教" },
-      { pinyin: "zhī", character: "之" },
-      { pinyin: "dào", character: "道" },
-      { pinyin: "guì", character: "贵" },
-      { pinyin: "yǐ", character: "以" },
-      { pinyin: "zhuān", character: "专" },
-    ],
-    explanation:
-      "缺乏教育引导，天性恐将迷失方向。教育的真谛，恰恰在于我们的凝心聚力。",
-  },
-]);
+import { data } from "@/data/ancientCulture/three_character_classic"; // 导入数据
 
-// 使用 ref 管理活动的选项和字号大小
+const contentList = ref(data); // 将导入的数据赋值给组件的响应式变量
+
 const activeToggle = ref<string[]>([]);
-const fontSize = ref<number>(16); // 初始字号
+const fontSize = ref<number>(16);
 
-// 方法：切换功能选项
+// 切换功能选项
 const toggleOption = (option: string) => {
   const index = activeToggle.value.indexOf(option);
   if (index === -1) {
@@ -147,12 +136,21 @@ const toggleOption = (option: string) => {
 
 // 增加字号
 const increaseFontSize = () => {
-  fontSize.value += 2; // 增加2px
+  fontSize.value += 2;
 };
 
 // 减小字号
 const decreaseFontSize = () => {
-  fontSize.value = Math.max(12, fontSize.value - 2); // 减少2px，最小12px
+  fontSize.value = Math.max(12, fontSize.value - 2);
+};
+
+// 将内容分为每组三个字一次
+const getGroups = (content) => {
+  const groups = [];
+  for (let i = 0; i < content.length; i += 3) {
+    groups.push(content.slice(i, i + 3));
+  }
+  return groups;
 };
 </script>
 
@@ -162,8 +160,33 @@ const decreaseFontSize = () => {
   padding: 20px;
 }
 
+.header {
+  margin-bottom: 20px; /* 和下方内容的间距 */
+  text-align: center; /* 文本居中 */
+}
+
+.header h4 {
+  margin: 0; /* 去掉默认的外边距 */
+  font-size: 1.5em; /* 设置标题字体大小 */
+}
+
+.header p {
+  margin: 5px 0 0; /* 上边距 */
+  font-size: 1.2em; /* 添加作者的字体大小 */
+}
+
+.content-wrapper {
+  flex-grow: 1; /* 使内容区域可扩展 */
+  overflow: hidden; /* 防止出现滚动条 */
+}
+
 .content {
-  flex-grow: 1;
+  max-height: calc(
+    100vh - 200px
+  ); /* 设置一个最大高度，考虑 header 和控制器的高度 */
+
+  padding: 5px; /* 为内容添加内边距 */
+  overflow-y: auto; /* 使内容区域在超出最大高度时可滚动 */
 }
 
 .content-item {
@@ -172,66 +195,52 @@ const decreaseFontSize = () => {
   border: 1px solid #ccc;
 }
 
-.main-content {
-  font-size: inherit; /* 从父元素继承字体大小 */
+.content-list {
+  display: flex; /* 使用flex来显示列表 */
+  flex-wrap: wrap; /* 允许换行 */
+  padding: 0; /* 去掉内边距 */
+  list-style-type: none; /* 去掉默认的列表样式 */
 }
 
-.characters {
-  display: flex;
-  flex-direction: column; /* 纵向排列拼音和字符 */
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 居中对齐 */
-  width: 80%; /* 每行占据总宽度的80% */
-  margin-right: auto; /* 水平居中 */
-  margin-left: auto;
+.content-item-list {
+  display: inline-flex; /* 使用inline-flex确保在同一行内显示 */
+  flex-direction: column; /* 垂直排列拼音和汉字 */
+  align-items: center; /* 中心对齐 */
+  width: 25%;
 }
 
-.full-line {
-  display: flex; /* 水平排列 */
-  justify-content: space-between; /* 平分剩下的宽度 */
-  width: 100%; /* 使用100%的宽度 */
-}
-
-.three-characters {
-  display: flex; /* 横向排列字符 */
-  justify-content: space-between; /* 平分宽度 */
-  width: 100%; /* 使用100%的宽度 */
-}
-
-.three-pinyin {
-  position: relative; /* 为每个拼音定位 */
-  display: flex; /* 横向排列拼音 */
-  justify-content: space-between; /* 平分宽度 */
-  width: 100%; /* 使用100%的宽度 */
-  margin-top: -1.5em; /* 调整位置将拼音放在字符正上方 */
-}
-
-.character {
-  flex: 1; /* 平等分配宽度 */
-  text-align: center; /* 字符居中 */
+.qzw {
+  display: inline-flex; /* 使用inline-flex确保在同一行内显示 */
+  flex-direction: column; /* 垂直排列拼音和汉字 */
+  align-items: center; /* 中心对齐 */
+  margin: 0 5px; /* 左右增加间距 */
 }
 
 .pinyin {
-  flex: 1; /* 平等分配宽度 */
-  text-align: center; /* 拼音居中 */
+  font-size: 0.8em; /* 设置拼音字体为更小 */
 }
 
-.explanation-content {
-  margin-top: 10px;
-  font-style: italic;
+.character {
+  font-size: 1.5em; /* 增加汉字的字体大小 */
+}
+
+.qzw_yiwen {
+  margin-top: 10px; /* 注释的上边距 */
+
+  /* font-style: italic; 注释为斜体 */
 }
 
 .controls {
   display: flex;
   flex-direction: column;
-  margin-left: 20px; /* 控制栏左侧间距 */
-}
-
-.controls > .button {
-  margin: 10px 0; /* 控制钮之间的间距 */
+  margin-left: 20px; /* 控制器的边距 */
 }
 
 .active {
-  background-color: #e2e2e2; /* 激活状态的样式（可以根据需要调整） */
+  background-color: #e2e2e2; /* 激活状态的背景 */
+}
+
+.tooltip-button {
+  margin-bottom: 10px; /* 为每个按钮添加下边距 */
 }
 </style>

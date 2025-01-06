@@ -1,4 +1,4 @@
-export const da = [
+export const data = [
   {
     content: [
       {
