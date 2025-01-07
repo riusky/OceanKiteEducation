@@ -2,8 +2,8 @@
   <div class="container flex">
     <div class="content-wrapper">
       <div class="header">
-        <h4>《千字文》</h4>
-        <p>南朝 · 周兴嗣</p>
+        <h4>《三字经》</h4>
+        <p>宋朝 · 王应麟</p>
       </div>
 
       <div class="content" :style="{ fontSize: fontSize + 'px' }">
@@ -117,7 +117,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { data } from "@/data/ancientCulture/qianziwen"; // 导入数据
+import { data } from "@/data/ancientCulture/dizigui"; // 导入数据
 
 const contentList = ref(data); // 将导入的数据赋值给组件的响应式变量
 
@@ -147,8 +147,8 @@ const decreaseFontSize = () => {
 // 将内容分为每组三个字一次
 const getGroups = (content) => {
   const groups = [];
-  for (let i = 0; i < content.length; i += 4) {
-    groups.push(content.slice(i, i + 4));
+  for (let i = 0; i < content.length; i += 3) {
+    groups.push(content.slice(i, i + 3));
   }
   return groups;
 };

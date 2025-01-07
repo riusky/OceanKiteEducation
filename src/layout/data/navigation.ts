@@ -282,6 +282,10 @@ export const navigation = {
           title: "高中",
           url: "/modernEducation/high",
         },
+        {
+          title: "弟子规",
+          url: "/modernEducation/dizigui",
+        },
       ],
     },
   ],

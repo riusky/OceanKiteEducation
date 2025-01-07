@@ -1,11 +1,10 @@
-// URL: https://guoxue.httpcn.com/book/sanzijing/
-// URL: https://guoxue.httpcn.com/book/dizigui/yiwen/
-// 选择译文版
+// 千字文译文版本
+// url https://guoxue.httpcn.com/book/qianziwen/yiwen/
 // 创建一个空对象保存结果
 const results = [];
 
 // 获取所有的列表项
-const listItems = document.querySelectorAll(".bjx_main ul li"); // 更改选择器以选择<ul>内的<li>项
+const listItems = document.querySelectorAll(".bjx_main ul li"); // 选择<ul>内的<li>项
 
 // 遍历每个列表项
 listItems.forEach((item) => {
@@ -18,9 +17,9 @@ listItems.forEach((item) => {
   const items = item.querySelectorAll("span.qzw");
 
   // 遍历每个元素并提取文本和拼音
-  items.forEach((item) => {
-    const textElement = item.querySelector("b");
-    const pinyinElement = item.querySelector("i");
+  items.forEach((span) => {
+    const textElement = span.querySelector("b");
+    const pinyinElement = span.querySelector("i");
     if (textElement && pinyinElement) {
       result.content.push({
         pinyin: pinyinElement.textContent.trim(),
