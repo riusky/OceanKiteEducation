@@ -22,7 +22,7 @@
                 <span
                   v-for="(char, charIndex) in group"
                   :key="charIndex"
-                  class="qzw"
+                  class="qzw hover:bg-foreground hover:text-primary-foreground"
                 >
                   <i v-if="activeToggle.includes('pinyin')" class="pinyin">{{
                     char.pinyin
@@ -193,6 +193,7 @@ const getGroups = (content) => {
   padding: 15px;
   margin-top: 20px;
   border: 1px solid #ccc;
+  border-radius: 5px; /* 边框圆角 */
 }
 
 .content-list {
