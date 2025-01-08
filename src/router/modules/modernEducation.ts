@@ -33,8 +33,16 @@ export default {
     },
     {
       path: "/modernEducation/dizigui",
-      name: "high",
+      name: "dizigui",
       component: () => import("@/views/modernEducation/dizigui.vue"),
+      meta: {
+        title: $t("modernEducation.high"),
+      },
+    },
+    {
+      path: "/modernEducation/baijiaxing_complex",
+      name: "baijiaxing_complex",
+      component: () => import("@/views/modernEducation/baijiaxing_complex.vue"),
       meta: {
         title: $t("modernEducation.high"),
       },

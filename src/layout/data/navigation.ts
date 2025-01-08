@@ -286,6 +286,10 @@ export const navigation = {
           title: "弟子规",
           url: "/modernEducation/dizigui",
         },
+        {
+          title: "百家姓复姓",
+          url: "/modernEducation/baijiaxing_complex",
+        },
       ],
     },
   ],

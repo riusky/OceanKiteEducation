@@ -2,8 +2,8 @@
   <div class="container flex">
     <div class="content-wrapper">
       <div class="header">
-        <h4>《三字经》</h4>
-        <p>宋朝 · 王应麟</p>
+        <h4>《弟子规》</h4>
+        <p>清朝 · 李毓秀</p>
       </div>
 
       <div class="content" :style="{ fontSize: fontSize + 'px' }">
