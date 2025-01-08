@@ -115,7 +115,6 @@
           </div>
           <div class="w-1/3 border-r overflow-y-auto p-4">
             <!-- 中间内容 -->
-            <h5><strong>家族名人</strong></h5>
             <div v-html="selectedItem?.famousNames || '暂无数据'" />
           </div>
           <div class="w-1/3 overflow-y-auto p-4">
