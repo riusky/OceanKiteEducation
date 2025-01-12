@@ -8,13 +8,12 @@
       >
         <Card class="h-full">
           <CardHeader>
-            <CardTitle>弟子规</CardTitle>
-            <CardDescription>清朝 · 李毓秀</CardDescription>
+            <CardTitle>三字经</CardTitle>
+            <CardDescription>宋朝 · 王应麟</CardDescription>
           </CardHeader>
           <CardContent class="flex flex-col gap-3">
             <p>
-              《弟子规》为清代李毓秀所作，是依据孔子教诲而编成的生活规范，核心思想是儒家的孝悌仁爱。
-              《弟子规》以三字一句，两句一韵的形式进行论述，阐释了“弟子”（圣贤弟子）在家、在外、待人接物、为人处世、求学等方面应具备的礼仪与规范。儿童通过诵读《弟子规》可获得道德理论方面的知识，明白人生的道理，对道德产生初步的了解，从而达到道德认识的启蒙作用。
+              《三字经》三字一句，朗朗上口，短小精悍，通俗易懂。以“人之初，性本善”起篇，叙述了三纲五常十义，五谷六畜七情，四书六经诸子，历史朝代更迭，最后以著名事例作结。通篇涵盖了中国传统文化文学、历史、天文、地理等知识，宣扬了传统伦理思想，如“仁、义、诚、敬、孝”。
             </p>
 
             <!-- 显示拼音 -->
@@ -124,7 +123,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
-import { data } from "@/data/ancientCulture/dizigui"; // 导入数据
+import { data } from "@/data/ancientCulture/sanzijing"; // 导入数据
 
 const contentList = ref(data); // 数据赋值为响应式变量
 
@@ -211,7 +210,9 @@ h1 {
 .content-item {
   padding: 15px;
   margin-top: 20px;
-  border: 1px solid #ccc;
+  color: hsl(var(--primary));
+  background: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
   border-radius: 5px; /* 边框圆角 */
 }
 

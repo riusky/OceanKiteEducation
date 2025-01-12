@@ -1,111 +1,111 @@
 <template>
-  <div class="container flex">
+  <div class="flex flex-col h-full w-full">
     <Drawer>
-      <div class="content-wrapper">
-        <div class="header">
-          <h4>《百家姓》</h4>
-          <p>南朝 · 周兴嗣</p>
+      <div class="flex flex-grow w-full">
+        <!-- 左侧操作部分 -->
+        <div
+          class="p-3 transition-all duration-300"
+          style="width: 300px; min-width: 300px; max-width: 300px"
+        >
+          <Card class="h-full">
+            <CardHeader>
+              <CardTitle>《百家姓》</CardTitle>
+              <CardDescription>南朝 · 周兴嗣</CardDescription>
+            </CardHeader>
+            <CardContent class="flex flex-col gap-3">
+              <p>
+                《百家姓》是南朝周兴嗣创作的启蒙教材，采用四字一句的格式排列，内容简洁明快，易于记忆和传颂。
+              </p>
+
+              <!-- 显示拼音 -->
+              <div class="flex flex-row items-center gap-x-2">
+                <Checkbox
+                  id="show-pinyin"
+                  :checked="activeToggle.includes('pinyin')"
+                  @update:checked="toggleOption('pinyin')"
+                />
+                <label for="show-pinyin" class="font-medium leading-none">
+                  显示拼音
+                </label>
+              </div>
+
+              <!-- 调整字号 -->
+              <div class="flex items-center space-x-3">
+                <Button
+                  variant="secondary"
+                  class="w-8 h-8"
+                  @click="decreaseFontSize"
+                  >-</Button
+                >
+                <span class="text-sm font-medium">{{ fontSize }}</span>
+                <Button
+                  variant="secondary"
+                  class="w-8 h-8"
+                  @click="increaseFontSize"
+                  >+</Button
+                >
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        <div class="content" :style="{ fontSize: fontSize + 'px' }">
-          <ul class="content-list">
-            <li
-              v-for="(line, lineIndex) in getLines(contentList)"
-              :key="lineIndex"
-              class="content-item"
-            >
-              <div class="content-item-list">
-                <span
-                  v-for="(group, groupIndex) in line"
-                  :key="groupIndex"
-                  class="group"
-                >
-                  <DrawerTrigger as-child>
-                    <div
-                      class="name-group flex hover:bg-foreground hover:text-primary-foreground"
-                      @click="openDrawer(group)"
-                    >
+        <!-- 右侧内容展示区域 -->
+        <div class="flex-grow p-4 transition-all duration-300">
+          <Card class="h-full flex flex-col">
+            <CardHeader>
+              <h1 class="text-xl font-bold text-center">百家姓复姓</h1>
+            </CardHeader>
+            <CardContent class="flex-1 overflow-y-auto">
+              <div class="content" :style="{ fontSize: fontSize + 'px' }">
+                <ul class="content-list">
+                  <li
+                    v-for="(line, lineIndex) in getLines(contentList)"
+                    :key="lineIndex"
+                    class="content-item"
+                  >
+                    <div class="content-item-list">
                       <span
-                        v-for="(char, charIndex) in group.names"
-                        :key="charIndex"
-                        class="qzw"
+                        v-for="(group, groupIndex) in line"
+                        :key="groupIndex"
+                        class="group"
                       >
-                        <i
-                          v-if="activeToggle.includes('pinyin')"
-                          class="pinyin"
-                        >
-                          {{ char.pinyin }}
-                        </i>
-                        <b class="character">{{ char.character }}</b>
+                        <DrawerTrigger as-child>
+                          <div
+                            class="name-group hover:bg-foreground hover:text-primary-foreground"
+                            @click="openDrawer(group)"
+                          >
+                            <span
+                              v-for="(char, charIndex) in group.names"
+                              :key="charIndex"
+                              class="qzw"
+                            >
+                              <i
+                                v-if="activeToggle.includes('pinyin')"
+                                class="pinyin"
+                              >
+                                {{ char.pinyin }}
+                              </i>
+                              <b class="character">{{ char.character }}</b>
+                            </span>
+                          </div>
+                        </DrawerTrigger>
                       </span>
                     </div>
-                  </DrawerTrigger>
-                </span>
+                  </li>
+                </ul>
               </div>
-            </li>
-          </ul>
+            </CardContent>
+          </Card>
         </div>
       </div>
-
-      <div class="controls flex flex-col justify-center">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger as-child>
-              <Button
-                :variant="
-                  activeToggle.includes('pinyin') ? 'default' : 'outline'
-                "
-                class="tooltip-button"
-                @click="toggleOption('pinyin')"
-              >
-                显示拼音
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>点击以显示拼音</p>
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger as-child>
-              <Button
-                variant="outline"
-                class="tooltip-button"
-                @click="increaseFontSize"
-              >
-                加大字号
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>点击以加大字号</p>
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger as-child>
-              <Button
-                variant="outline"
-                class="tooltip-button"
-                @click="decreaseFontSize"
-              >
-                减小字号
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>点击以减小字号</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-
+      <!-- 抽屉组件 -->
       <DrawerContent class="flex flex-col h-1/2 overflow-hidden">
         <DrawerHeader>
-          <DrawerTitle
-            >百家姓:
-            {{
-              selectedItem.names.map((name) => name.character).join("")
-            }}</DrawerTitle
-          >
+          <DrawerTitle>
+            百家姓:
+            {{ selectedItem.names.map((name) => name.character).join("") }}
+          </DrawerTitle>
+          <CardDescription />
         </DrawerHeader>
         <div class="flex w-full h-full overflow-hidden">
           <div class="w-1/3 border-r overflow-y-auto p-4">
@@ -115,6 +115,7 @@
           </div>
           <div class="w-1/3 border-r overflow-y-auto p-4">
             <!-- 中间内容 -->
+            <!-- <h5><strong>家族名人</strong></h5> -->
             <div v-html="selectedItem?.famousNames || '暂无数据'" />
           </div>
           <div class="w-1/3 overflow-y-auto p-4">
@@ -130,13 +131,15 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Button } from "@/components/ui/button";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Card,
+  CardDescription,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Drawer,
   DrawerContent,
@@ -144,15 +147,16 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { data } from "@/data/ancientCulture/baijiaxing_complex"; // 导入数据
+
+import { data } from "@/data/ancientCulture/baijiaxing_complex"; // 数据导入
 
 const contentList = ref(data);
 
 const activeToggle = ref<string[]>([]);
 const fontSize = ref<number>(16);
-const selectedItem = ref(data[0]); // 用于选中的姓氏信息
+const selectedItem = ref(data[0]); // 当前选中组
 
-// 切换拼音显示功能
+// 切换功能选项
 const toggleOption = (option: string) => {
   const index = activeToggle.value.indexOf(option);
   if (index === -1) {
@@ -164,14 +168,14 @@ const toggleOption = (option: string) => {
 
 // 打开抽屉并显示相关信息
 const openDrawer = (group) => {
-  selectedItem.value = group; // 将选中的组赋值给selectedItem
+  selectedItem.value = group;
 };
 
-// 将内容数据分组为每行（每行展示5个数组中的元素）
+// 将内容分组为每行5组
 const getLines = (items) => {
   const lines = [];
   for (let i = 0; i < items.length; i += 5) {
-    lines.push(items.slice(i, i + 5)); // 每5个元素为一组
+    lines.push(items.slice(i, i + 5)); // 每5个元素为一行
   }
   return lines;
 };
@@ -188,29 +192,35 @@ const decreaseFontSize = () => {
 </script>
 
 <style scoped>
-.container {
+.flex {
   display: flex;
-  padding: 20px;
 }
 
-.header {
-  margin-bottom: 20px;
-  text-align: center;
+.h-full {
+  height: 100%;
 }
 
-.header h4 {
-  margin: 0;
+.w-full {
+  width: 100%;
+}
+
+.qzw {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.pinyin {
+  font-size: 0.8em;
+}
+
+.character {
   font-size: 1.5em;
-}
-
-.header p {
-  margin: 5px 0 0;
-  font-size: 1.2em;
-}
-
-.content-wrapper {
-  flex-grow: 1;
-  overflow: hidden;
 }
 
 .content {
@@ -227,44 +237,30 @@ const decreaseFontSize = () => {
 .content-item {
   padding: 15px;
   margin-top: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid hsl(var(--foreground));
+  border-radius: 5px; /* 边框圆角 */
 }
 
 .content-item-list {
-  display: flex; /* 一行显示所有组 */
-  justify-content: space-around; /* 每组之间均等分配空间 */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .group {
-  display: flex; /* 允许在组内横向排列 */
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 水平居中 */
-  width: calc(20% - 10px); /* 每组占用20%的宽度，确保5组在一行 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(20% - 10px); /* 每组占用20%的宽度 */
 }
 
 .name-group {
-  display: flex; /* 在组内显示拼音和汉字左右排列 */
-  align-items: center; /* 垂直居中 */
-  cursor: pointer; /* 鼠标悬停时显示为点击状态 */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
   transition:
     background-color 0.3s,
-    color 0.3s; /* 平滑过渡效果 */
-}
-
-.qzw {
-  display: flex; /* 使每个字符并排显示 */
-  flex-direction: column; /* 垂直排列拼音和汉字 */
-  align-items: center; /* 中心对齐 */
-  margin: 0 5px; /* 字符间的间距 */
-}
-
-.pinyin {
-  font-size: 0.8em; /* 拼音字体设置 */
-}
-
-.character {
-  font-size: 1.5em; /* 字体大小 */
+    color 0.3s;
 }
 
 .controls {
@@ -274,6 +270,6 @@ const decreaseFontSize = () => {
 }
 
 .tooltip-button {
-  margin-bottom: 10px; /* 为每个按钮添加下边距 */
+  margin-bottom: 10px;
 }
 </style>

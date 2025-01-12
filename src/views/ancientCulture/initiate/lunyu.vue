@@ -134,7 +134,7 @@
 
       <!-- 右侧内容展示区域 -->
       <div
-        class="p-2 transition-all duration-300 overflow-y-auto w-full"
+        class="p-2 transition-all duration-300 overflow-y-auto"
         style="height: calc(100vh - 64px)"
       >
         <Card class="h-full flex flex-col">
@@ -315,6 +315,8 @@ const decreaseFontSize = () => {
 .content-item {
   color: hsl(var(--primary));
   background: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
+  border-radius: 5px; /* 边框圆角 */
 }
 
 .annotations {

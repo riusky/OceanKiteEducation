@@ -211,7 +211,9 @@ h1 {
 .content-item {
   padding: 15px;
   margin-top: 20px;
-  border: 1px solid #ccc;
+  color: hsl(var(--primary));
+  background: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
   border-radius: 5px; /* 边框圆角 */
 }
 

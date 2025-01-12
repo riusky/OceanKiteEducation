@@ -13,7 +13,7 @@
       >
         <Card class="h-full flex flex-col">
           <CardHeader>
-            <CardTitle>古诗词</CardTitle>
+            <CardTitle>唐诗三百首</CardTitle>
             <CardDescription>清朝 · 孙洙</CardDescription>
           </CardHeader>
           <CardContent class="flex flex-col gap-3 overflow-y-auto">

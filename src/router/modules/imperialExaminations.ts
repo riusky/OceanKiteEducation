@@ -2,25 +2,75 @@ import { $t } from "@/plugins/i18n";
 
 export default {
   path: "/ancientCulture", // 主路由路径：古代文化
-  redirect: "/ancientCulture/initiate", // 默认重定向到 "国学启蒙"
+  redirect: "/ancientCulture/sanzijing", // 默认重定向到 "国学启蒙"
   meta: {
     title: $t("AncientCulture.index"), // 路由标题：古代文化
   },
   children: [
     {
-      path: "/ancientCulture/initiate", // 路由路径：国学启蒙
-      name: "Initiate", // 路由名称
-      component: () => import("@/views/ancientCulture/initiate.vue"), // 对应的组件路径
+      path: "/ancientCulture/sanzijing", // 路由路径：国学启蒙
+      name: "sanzijing", // 路由名称
+      component: () => import("@/views/ancientCulture/initiate/sanzijing.vue"),
       meta: {
         title: $t("AncientCulture.initiate"), // 路由标题：国学启蒙
       },
     },
     {
-      path: "/ancientCulture/temperament",
-      name: "Temperament", // 路由名称：声律
-      component: () => import("@/views/ancientCulture/temperament.vue"), // 对应的组件路径
+      path: "/ancientCulture/baijiaxing",
+      name: "baijiaxing",
+      component: () => import("@/views/ancientCulture/initiate/baijiaxing.vue"),
       meta: {
-        title: $t("AncientCulture.temperament"), // 路由标题：声律
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/baijiaxingcomplex",
+      name: "baijiaxingcomplex",
+      component: () =>
+        import("@/views/ancientCulture/initiate/baijiaxing_complex.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/dizigui",
+      name: "dizigui",
+      component: () => import("@/views/ancientCulture/initiate/dizigui.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/qianziwen",
+      name: "qianziwen",
+      component: () => import("@/views/ancientCulture/initiate/qianziwen.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/lunyu",
+      name: "lunyu",
+      component: () => import("@/views/ancientCulture/initiate/lunyu.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/zhuzijiaxun",
+      name: "zhuzijiaxun",
+      component: () =>
+        import("@/views/ancientCulture/initiate/zhuzijiaxun.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/tangshi300",
+      name: "tangshi300",
+      component: () => import("@/views/ancientCulture/initiate/tangshi300.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
       },
     },
     {

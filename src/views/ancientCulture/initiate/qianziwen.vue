@@ -8,13 +8,12 @@
       >
         <Card class="h-full">
           <CardHeader>
-            <CardTitle>弟子规</CardTitle>
-            <CardDescription>清朝 · 李毓秀</CardDescription>
+            <CardTitle>《千字文》</CardTitle>
+            <CardDescription>南朝 · 周兴嗣</CardDescription>
           </CardHeader>
           <CardContent class="flex flex-col gap-3">
             <p>
-              《弟子规》为清代李毓秀所作，是依据孔子教诲而编成的生活规范，核心思想是儒家的孝悌仁爱。
-              《弟子规》以三字一句，两句一韵的形式进行论述，阐释了“弟子”（圣贤弟子）在家、在外、待人接物、为人处世、求学等方面应具备的礼仪与规范。儿童通过诵读《弟子规》可获得道德理论方面的知识，明白人生的道理，对道德产生初步的了解，从而达到道德认识的启蒙作用。
+              《千字文》出自南朝才人周兴嗣，全文由完全不重复的一千个字组成，包含了天文、地理、历史、社会、伦理、教育等等多方面的知识，是我国历史上综合性启蒙教育读物的开山之作。
             </p>
 
             <!-- 显示拼音 -->
@@ -37,7 +36,7 @@
                 @update:checked="toggleOption('explanation')"
               />
               <label for="show-explanation" class="font-medium leading-none">
-                显示注释
+                显示解释
               </label>
             </div>
 
@@ -65,7 +64,7 @@
       <div class="flex-grow p-4 transition-all duration-300">
         <Card class="h-full flex flex-col">
           <CardHeader>
-            <h1 class="text-xl font-bold text-center">弟子规</h1>
+            <h1 class="text-xl font-bold text-center">千字文</h1>
           </CardHeader>
           <CardContent class="flex-1 overflow-y-auto">
             <div class="content" :style="{ fontSize: fontSize + 'px' }">
@@ -99,7 +98,7 @@
                 </ul>
                 <div
                   v-if="activeToggle.includes('explanation')"
-                  class="qzw_yiwen text-sm leading-relaxed indent-2 mt-4"
+                  class="qzw_yiwen"
                 >
                   <p>{{ item.explanation }}</p>
                 </div>
@@ -123,13 +122,12 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { data } from "@/data/ancientCulture/qianziwen"; // 数据导入
 
-import { data } from "@/data/ancientCulture/dizigui"; // 导入数据
+const contentList = ref(data); // 数据
 
-const contentList = ref(data); // 数据赋值为响应式变量
-
-const activeToggle = ref<string[]>([]); // 拼音与注释的开关
-const fontSize = ref<number>(20); // 默认字号
+const activeToggle = ref<string[]>([]);
+const fontSize = ref<number>(20);
 
 // 切换功能选项
 const toggleOption = (option: string) => {
@@ -151,23 +149,18 @@ const decreaseFontSize = () => {
   fontSize.value = Math.max(12, fontSize.value - 2);
 };
 
-// 将内容分为每组三个字一次
+// 将内容分为每组4个字
 const getGroups = (content) => {
   const groups = [];
-  for (let i = 0; i < content.length; i += 3) {
-    groups.push(content.slice(i, i + 3));
+  for (let i = 0; i < content.length; i += 4) {
+    groups.push(content.slice(i, i + 4));
   }
   return groups;
 };
 </script>
 
 <style scoped>
-/* 顶部标题居中样式 */
-h1 {
-  margin: 0;
-  text-align: center;
-}
-
+/* 整体布局样式 */
 .flex {
   display: flex;
 }
@@ -180,46 +173,45 @@ h1 {
   width: 100%;
 }
 
+/* 拼音和汉字样式 */
 .qzw {
-  display: inline-flex; /* 使用inline-flex确保在同一行内显示 */
-  flex-direction: column; /* 垂直排列拼音和汉字 */
-  align-items: center; /* 中心对齐 */
-  margin: 0 5px; /* 左右增加间距 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .pinyin {
-  font-size: 0.8em; /* 设置拼音字体为更小 */
+  font-size: 0.8em;
 }
 
 .character {
-  font-size: 1.5em; /* 增加汉字的字体大小 */
+  font-size: 1.5em;
 }
 
-.qzw_yiwen {
-  margin-top: 10px; /* 注释的上边距 */
-}
-
+/* 内容区样式 */
 .content {
-  max-height: calc(
-    100vh - 200px
-  ); /* 设置一个最大高度，考虑 header 和控制器的高度 */
+  max-height: calc(100vh - 200px);
+  padding: 5px;
+  overflow-y: auto;
+}
 
-  padding: 5px; /* 为内容添加内边距 */
-  overflow-y: auto; /* 使内容区域在超出最大高度时可滚动 */
+.content-list {
+  padding: 0;
+  list-style-type: none;
 }
 
 .content-item {
   padding: 15px;
   margin-top: 20px;
-  border: 1px solid #ccc;
+  color: hsl(var(--primary));
+  background: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
   border-radius: 5px; /* 边框圆角 */
-}
-
-.content-list {
-  display: flex; /* 使用flex来显示列表 */
-  flex-wrap: wrap; /* 允许换行 */
-  padding: 0; /* 去掉内边距 */
-  list-style-type: none; /* 去掉默认的列表样式 */
 }
 
 .content-item-list {
@@ -227,5 +219,11 @@ h1 {
   flex-direction: column; /* 垂直排列拼音和汉字 */
   align-items: center; /* 中心对齐 */
   width: 25%;
+}
+
+.qzw_yiwen {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666; /* 注释颜色 */
 }
 </style>

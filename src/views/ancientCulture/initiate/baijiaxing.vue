@@ -99,6 +99,7 @@
       <DrawerContent class="flex flex-col h-1/2 overflow-hidden">
         <DrawerHeader>
           <DrawerTitle>百家姓: {{ selectedItem.surname }}</DrawerTitle>
+          <CardDescription />
         </DrawerHeader>
         <div class="flex w-full h-full overflow-hidden">
           <div class="w-1/3 border-r overflow-y-auto p-4">
@@ -244,7 +245,9 @@ const openDrawer = (item) => {
 .content-item {
   padding: 15px;
   margin-top: 20px;
-  border: 1px solid hsl(var(--foreground));
+  color: hsl(var(--primary));
+  background: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
   border-radius: 5px; /* 边框圆角 */
 }
 

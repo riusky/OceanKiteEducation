@@ -33,7 +33,7 @@ export default {
     },
     {
       path: "/modernEducation/dizigui",
-      name: "dizigui",
+      name: "dizigui2",
       component: () => import("@/views/modernEducation/dizigui.vue"),
       meta: {
         title: $t("modernEducation.high"),

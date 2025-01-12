@@ -8,13 +8,37 @@ export const navigation = {
       isActive: true,
       items: [
         {
-          title: "蒙学",
+          title: "三字经",
           isActive: true,
-          url: "/ancientCulture/initiate",
+          url: "/ancientCulture/sanzijing",
         },
         {
-          title: "声律",
-          url: "/ancientCulture/temperament",
+          title: "百家姓",
+          url: "/ancientCulture/baijiaxing",
+        },
+        {
+          title: "百家姓 · 复姓",
+          url: "/ancientCulture/baijiaxingcomplex",
+        },
+        {
+          title: "千字文",
+          url: "/ancientCulture/qianziwen",
+        },
+        {
+          title: "弟子规",
+          url: "/ancientCulture/dizigui",
+        },
+        {
+          title: "论语",
+          url: "/ancientCulture/lunyu",
+        },
+        {
+          title: "朱子家训",
+          url: "/ancientCulture/zhuzijiaxun",
+        },
+        {
+          title: "唐诗三百首",
+          url: "/ancientCulture/tangshi300",
         },
       ],
     },
