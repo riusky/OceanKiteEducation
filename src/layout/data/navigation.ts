@@ -44,37 +44,37 @@ export const navigation = {
           title: "宋词三百首",
           url: "/ancientCulture/songci300",
         },
-      ],
-    },
-    {
-      title: "诸子百家",
-      icon: BookOpen,
-      isActive: false,
-      items: [
         {
-          title: "诸子",
-          isActive: true,
-          url: "/ancientCulture/zhuZi",
+          title: "幼学琼林",
+          url: "/ancientCulture/youxueqionglin",
         },
         {
-          title: "百家",
-          url: "/ancientCulture/baiJia",
+          title: "增广贤文",
+          url: "/ancientCulture/zengguangxianwen",
         },
       ],
     },
     {
-      title: "四书五经",
+      title: "四书",
       icon: BookOpen,
       isActive: false,
       items: [
         {
-          title: "四书",
+          title: "论语",
           isActive: true,
-          url: "/ancientCulture/fourBooks",
+          url: "/ancientCulture/lunyu",
         },
         {
-          title: "五经",
-          url: "/ancientCulture/fiveClassics",
+          title: "大学",
+          url: "/sishu/daxue",
+        },
+        {
+          title: "中庸",
+          url: "/sishu/zhongyong",
+        },
+        {
+          title: "孟子",
+          url: "/sishu/mengzi",
         },
       ],
     },

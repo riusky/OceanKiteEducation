@@ -13,39 +13,39 @@
       >
         <Card class="h-full flex flex-col">
           <CardHeader>
-            <CardTitle>宋词三百首</CardTitle>
-            <CardDescription>清朝 · 朱孝臧</CardDescription>
+            <CardTitle>中庸</CardTitle>
+            <CardDescription>南宋朝 · 子思</CardDescription>
           </CardHeader>
           <CardContent class="flex flex-col gap-3 overflow-y-auto">
             <p>
-              《宋词三百首》，由上彊村民朱孝臧于1924年编定的《宋词三百首》，共收宋代词人八十八家，词三百首。
+              《中庸》是一篇论述儒家人性修养的散文，原是《礼记》第三十一篇，相传为子思所作，是儒家学说经典论著。
             </p>
 
             <!-- 分类选择 -->
-            <Select v-model="selectedCategory">
+            <Select v-model="selectedChapter">
               <SelectTrigger class="w-full">
-                <SelectValue placeholder="请选择分类" />
+                <SelectValue placeholder="请选择章节" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>分类</SelectLabel>
+                  <SelectLabel>章节</SelectLabel>
                   <SelectItem
-                    v-for="(category, index) in uniqueCategories"
+                    v-for="(chapter, index) in uniqueChapters"
                     :key="index"
-                    :value="category"
+                    :value="chapter"
                   >
-                    {{ category }}
+                    {{ chapter }}
                   </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
 
-            <!-- 诗标题列表 -->
-            <div v-if="filteredTitles.length" class="mt-4">
+            <!-- 标题列表 -->
+            <div v-if="currentTitles.length" class="mt-4">
               <ul class="title-list overflow-y-auto max-h-[300px]">
                 <TooltipProvider>
                   <li
-                    v-for="(title, index) in filteredTitles"
+                    v-for="(title, index) in currentTitles"
                     :key="index"
                     class="title-item cursor-pointer p-2 rounded"
                     :class="{
@@ -116,13 +116,6 @@
             <h1 class="text-xl font-bold text-center">
               {{ selectedTitle ? selectedTitle.title : "章节内容" }}
             </h1>
-            <CardDescription class="text-center">
-              {{
-                selectedTitle
-                  ? `${selectedTitle.dynasty} · ${selectedTitle.author}`
-                  : "无"
-              }}
-            </CardDescription>
           </CardHeader>
           <!-- 动态章节内容 -->
           <CardContent class="flex-1 overflow-y-auto">
@@ -133,28 +126,18 @@
             >
               <!-- 内容展示 -->
               <div class="content-item">
-                <div
-                  v-for="(
-                    paragraph, paragraphIndex
-                  ) in selectedTitle.pinyinCharacters"
-                  :key="paragraphIndex"
-                  class="pinyin-paragraph"
-                >
-                  <div class="pinyin-grid">
-                    <span class="indent" />
-                    <span
-                      v-for="(char, charIndex) in paragraph"
-                      :key="charIndex"
-                      class="pinyin-cell"
-                    >
-                      <i
-                        v-if="activeToggle.includes('pinyin')"
-                        class="pinyin"
-                        >{{ char.pinyin }}</i
-                      >
-                      <b class="character">{{ char.character }}</b>
-                    </span>
-                  </div>
+                <div class="pinyin-grid">
+                  <span class="indent" />
+                  <span
+                    v-for="(char, charIndex) in selectedTitle.details.content"
+                    :key="charIndex"
+                    class="pinyin-cell"
+                  >
+                    <i v-if="activeToggle.includes('pinyin')" class="pinyin">{{
+                      char.pinyin
+                    }}</i>
+                    <b class="character">{{ char.character }}</b>
+                  </span>
                 </div>
               </div>
 
@@ -166,7 +149,8 @@
                 <h3 class="font-bold text-lg">注释：</h3>
                 <ul class="annotation-list">
                   <li
-                    v-for="(annotation, index) in selectedTitle.annotations"
+                    v-for="(annotation, index) in selectedTitle.details
+                      .annotations"
                     :key="index"
                   >
                     {{ annotation }}
@@ -180,7 +164,7 @@
                 class="translation mt-4"
               >
                 <h3 class="font-bold text-lg">翻译：</h3>
-                <div v-html="selectedTitle.translation" />
+                <p>{{ selectedTitle.details.translation }}</p>
               </div>
 
               <!-- 评析 -->
@@ -189,7 +173,7 @@
                 class="commentary mt-4"
               >
                 <h3 class="font-bold text-lg">评析：</h3>
-                <div v-html="selectedTitle.comments" />
+                <p>{{ selectedTitle.details.commentary }}</p>
               </div>
             </div>
           </CardContent>
@@ -227,20 +211,20 @@ import {
 } from "@/components/ui/tooltip";
 
 // 数据导入
-import { data } from "@/data/ancientCulture/songci300";
+import { data } from "@/data/sishu/zhongyong";
 
 // 初始化章节选择数据
-const selectedCategory = ref(data[0].category);
+const selectedChapter = ref(data[0].chapter);
 const selectedTitle = ref(data[0]);
 const activeToggle = ref<string[]>(["pinyin", "annotations"]);
 const fontSize = ref<number>(16);
 
-const uniqueCategories = computed(() => [
-  ...new Set(data.map((item) => item.category)),
+const uniqueChapters = computed(() => [
+  ...new Set(data.map((item) => item.chapter)),
 ]);
 
-const filteredTitles = computed(() => {
-  return data.filter((item) => item.category === selectedCategory.value);
+const currentTitles = computed(() => {
+  return data.filter((item) => item.chapter === selectedChapter.value);
 });
 
 const selectTitle = (title) => {
@@ -271,8 +255,8 @@ const decreaseFontSize = () => {
   fontSize.value = Math.max(12, fontSize.value - 2);
 };
 
-watch(selectedCategory, () => {
-  selectedTitle.value = filteredTitles.value[0];
+watch(selectedChapter, () => {
+  selectedTitle.value = currentTitles.value[0];
 });
 </script>
 
@@ -304,18 +288,16 @@ watch(selectedCategory, () => {
 
 .pinyin {
   font-size: 0.9em;
-  line-height: 1; /* 紧贴文字 */
   color: hsl(var(--primary));
 }
 
 .character {
-  margin-top: 2px;
+  margin-top: 4px;
   font-size: 1.4em;
   font-weight: bold;
 }
 
 .content-item {
-  padding: 10px;
   color: hsl(var(--primary));
   background: hsl(var(--primary-foreground));
 
@@ -328,9 +310,29 @@ watch(selectedCategory, () => {
 .commentary {
   padding: 10px;
   margin-top: 20px;
-  color: hsl(var(--accent-foreground));
-  background: hsl(var(--accent));
+  background: hsl(var(--muted));
   border: 1px solid hsl(var(--background));
   border-radius: 8px;
+}
+
+.title-list {
+  max-height: 200px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.title-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.title-item:hover {
+  background-color: var(--primary-hover);
+}
+
+.title-item.bg-primary-foreground {
+  background-color: var(--primary-selected);
 }
 </style>

@@ -82,19 +82,45 @@ export default {
       },
     },
     {
-      path: "/ancientCulture/zhuZi", // 诸子
-      name: "ZhuZi",
-      component: () => import("@/views/ancientCulture/zhuZi.vue"),
+      path: "/ancientCulture/youxueqionglin",
+      name: "youxueqionglin",
+      component: () =>
+        import("@/views/ancientCulture/initiate/youxueqionglin.vue"),
       meta: {
-        title: $t("AncientCulture.zhuZi"),
+        title: $t("AncientCulture.temperament"),
       },
     },
     {
-      path: "/ancientCulture/baiJia", // 百家
-      name: "BaiJia",
-      component: () => import("@/views/ancientCulture/baiJia.vue"),
+      path: "/ancientCulture/zengguangxianwen",
+      name: "zengguangxianwen",
+      component: () =>
+        import("@/views/ancientCulture/initiate/zengguangxianwen.vue"),
       meta: {
-        title: $t("AncientCulture.baiJia"),
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/sishu/daxue",
+      name: "daxue",
+      component: () => import("@/views/ancientCulture/sishu/daxue.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/sishu/zhongyong",
+      name: "zhongyong",
+      component: () => import("@/views/ancientCulture/sishu/zhongyong.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/sishu/mengzi",
+      name: "mengzi",
+      component: () => import("@/views/ancientCulture/sishu/mengzi.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
       },
     },
     {

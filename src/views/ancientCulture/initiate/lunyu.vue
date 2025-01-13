@@ -20,9 +20,11 @@
             <p>
               《论语》是孔子及其弟子的语录结集，由孔子弟子及再传弟子编写而成，至战国前期成书。全书共20篇492章，以语录体为主，叙事体为辅，主要记录孔子及其弟子的言行，较为集中地体现了孔子的政治主张、伦理思想、道德观念及教育原则等。
             </p>
+
+            <!-- 分类选择 -->
             <Select v-model="selectedChapter">
               <SelectTrigger class="w-full">
-                <SelectValue placeholder="请选择一个章节" />
+                <SelectValue placeholder="请选择章节" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -38,7 +40,7 @@
               </SelectContent>
             </Select>
 
-            <!-- Title 列表 -->
+            <!-- 标题列表 -->
             <div v-if="currentTitles.length" class="mt-4">
               <ul class="title-list overflow-y-auto max-h-[300px]">
                 <TooltipProvider>
@@ -50,7 +52,7 @@
                       'bg-primary-foreground text-primary':
                         selectedTitle.title === title.title,
                     }"
-                    @click="selectedTitle = title"
+                    @click="selectTitle(title)"
                   >
                     <Tooltip>
                       <TooltipTrigger as-child>
@@ -64,56 +66,27 @@
                 </TooltipProvider>
               </ul>
             </div>
-            <!-- 显示拼音 -->
-            <div class="flex flex-row items-center gap-x-2">
-              <Checkbox
-                id="show-pinyin"
-                :checked="activeToggle.includes('pinyin')"
-                @update:checked="toggleOption('pinyin')"
-              />
-              <label for="show-pinyin" class="font-medium leading-none">
-                显示拼音
-              </label>
+
+            <!-- 功能切换 -->
+            <div class="flex flex-col gap-2 mt-4">
+              <div
+                v-for="option in toggleOptions"
+                :key="option.id"
+                class="flex items-center gap-2"
+              >
+                <Checkbox
+                  :id="option.id"
+                  :checked="activeToggle.includes(option.id)"
+                  @update:checked="toggleOption(option.id)"
+                />
+                <label :for="option.id" class="font-medium leading-none">{{
+                  option.label
+                }}</label>
+              </div>
             </div>
 
-            <!-- 显示注释 -->
-            <div class="flex flex-row items-center gap-x-2">
-              <Checkbox
-                id="show-annotations"
-                :checked="activeToggle.includes('annotations')"
-                @update:checked="toggleOption('annotations')"
-              />
-              <label for="show-annotations" class="font-medium leading-none">
-                显示注释
-              </label>
-            </div>
-
-            <!-- 显示翻译 -->
-            <div class="flex flex-row items-center gap-x-2">
-              <Checkbox
-                id="show-translation"
-                :checked="activeToggle.includes('translation')"
-                @update:checked="toggleOption('translation')"
-              />
-              <label for="show-translation" class="font-medium leading-none">
-                显示翻译
-              </label>
-            </div>
-
-            <!-- 显示评析 -->
-            <div class="flex flex-row items-center gap-x-2">
-              <Checkbox
-                id="show-commentary"
-                :checked="activeToggle.includes('commentary')"
-                @update:checked="toggleOption('commentary')"
-              />
-              <label for="show-commentary" class="font-medium leading-none">
-                显示评析
-              </label>
-            </div>
-
-            <!-- 调整字号 -->
-            <div class="flex items-center space-x-3">
+            <!-- 字号调整 -->
+            <div class="flex items-center space-x-3 mt-4">
               <Button
                 variant="secondary"
                 class="w-8 h-8"
@@ -134,7 +107,7 @@
 
       <!-- 右侧内容展示区域 -->
       <div
-        class="p-2 transition-all duration-300 overflow-y-auto"
+        class="p-2 transition-all duration-300 overflow-y-auto w-full"
         style="height: calc(100vh - 64px)"
       >
         <Card class="h-full flex flex-col">
@@ -153,18 +126,19 @@
             >
               <!-- 内容展示 -->
               <div class="content-item">
-                <ul class="content-list">
-                  <li
+                <div class="pinyin-grid">
+                  <span class="indent" />
+                  <span
                     v-for="(char, charIndex) in selectedTitle.details.content"
                     :key="charIndex"
-                    class="qzw hover:bg-foreground hover:text-primary-foreground"
+                    class="pinyin-cell"
                   >
-                    <i v-if="activeToggle.includes('pinyin')" class="pinyin">
-                      {{ char.pinyin }}
-                    </i>
+                    <i v-if="activeToggle.includes('pinyin')" class="pinyin">{{
+                      char.pinyin
+                    }}</i>
                     <b class="character">{{ char.character }}</b>
-                  </li>
-                </ul>
+                  </span>
+                </div>
               </div>
 
               <!-- 注释 -->
@@ -240,29 +214,30 @@ import {
 import { data } from "@/data/ancientCulture/lunyu";
 
 // 初始化章节选择数据
-const selectedChapter = ref(data[0].chapter); // 初始化选中第一个章节
-const selectedTitle = ref(data[0]); // 初始化选中第一个章节的第一个 title
-const activeToggle = ref<string[]>(["pinyin", "annotations"]); // 默认显示拼音和注释
+const selectedChapter = ref(data[0].chapter);
+const selectedTitle = ref(data[0]);
+const activeToggle = ref<string[]>(["pinyin", "annotations"]);
 const fontSize = ref<number>(16);
 
-// 获取去重后的章节列表
 const uniqueChapters = computed(() => [
   ...new Set(data.map((item) => item.chapter)),
 ]);
 
-// 当前选中章节下的所有标题
 const currentTitles = computed(() => {
   return data.filter((item) => item.chapter === selectedChapter.value);
 });
 
-// 监听章节变化，自动设置默认的第一个 title
-watch(selectedChapter, (newChapter) => {
-  if (newChapter) {
-    selectedTitle.value = currentTitles.value[0]; // 默认选择第一个 title
-  }
-});
+const selectTitle = (title) => {
+  selectedTitle.value = title;
+};
 
-// 切换功能选项
+const toggleOptions = [
+  { id: "pinyin", label: "显示拼音" },
+  { id: "annotations", label: "显示注释" },
+  { id: "translation", label: "显示翻译" },
+  { id: "commentary", label: "显示评析" },
+];
+
 const toggleOption = (option: string) => {
   const index = activeToggle.value.indexOf(option);
   if (index === -1) {
@@ -272,64 +247,65 @@ const toggleOption = (option: string) => {
   }
 };
 
-// 增加字号
 const increaseFontSize = () => {
   fontSize.value += 2;
 };
 
-// 减小字号
 const decreaseFontSize = () => {
   fontSize.value = Math.max(12, fontSize.value - 2);
 };
+
+watch(selectedChapter, () => {
+  selectedTitle.value = currentTitles.value[0];
+});
 </script>
 
 <style scoped>
-.flex {
+.pinyin-paragraph {
+  margin-bottom: 4px;
+}
+
+.pinyin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 4px;
+  place-items: center center;
+}
+
+.indent {
+  grid-column: span 2;
+}
+
+.pinyin-cell {
   display: flex;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.qzw {
-  display: inline-flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 5px;
-  cursor: pointer;
+  justify-content: center;
+
+  /* height: 60px; */
+  text-align: center;
 }
 
 .pinyin {
-  font-size: 0.8em;
+  font-size: 0.9em;
+  color: hsl(var(--primary));
 }
 
 .character {
-  font-size: 1.5em;
+  margin-top: 4px;
+  font-size: 1.4em;
+  font-weight: bold;
 }
 
 .content-item {
   color: hsl(var(--primary));
   background: hsl(var(--primary-foreground));
-  border: 1px solid hsl(var(--primary));
+
+  /* border: 1px solid hsl(var(--primary)); */
   border-radius: 5px; /* 边框圆角 */
 }
 
-.annotations {
-  padding: 10px;
-  background: hsl(var(--muted));
-  border-radius: 8px;
-}
-
-.annotation-list {
-  padding: 0;
-  list-style: none;
-}
-
+.annotations,
 .translation,
 .commentary {
   padding: 10px;
@@ -340,31 +316,23 @@ const decreaseFontSize = () => {
 }
 
 .title-list {
-  max-height: 200px; /* 固定高度 */
+  max-height: 200px;
   padding: 0;
   margin: 0;
-  overflow-y: auto; /* 滚动条 */
   list-style: none;
 }
 
 .title-item {
   padding: 5px 10px;
-  overflow: hidden;
-  text-overflow: ellipsis; /* 超出部分显示省略号 */
-  white-space: nowrap; /* 保证一行显示 */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .title-item:hover {
-  background-color: var(--primary-hover); /* 使用 shadcn-vue 的颜色系统 */
+  background-color: var(--primary-hover);
 }
 
-.title-item.bg-primary-100 {
-  background-color: var(--primary-selected); /* 选中状态颜色 */
-}
-
-.overflow-y-auto {
-  overflow-y: auto; /* 启用滚动条 */
+.title-item.bg-primary-foreground {
+  background-color: var(--primary-selected);
 }
 </style>
