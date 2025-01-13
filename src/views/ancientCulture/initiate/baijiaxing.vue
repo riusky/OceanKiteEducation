@@ -146,7 +146,7 @@ import { data } from "@/data/ancientCulture/baijiaxing_single"; // 导入数据
 
 const contentList = ref(data); // 数据赋值为响应式变量
 const activeToggle = ref<string[]>([]); // 拼音与注释的开关
-const fontSize = ref<number>(20); // 默认字号
+const fontSize = ref<number>(16); // 默认字号
 const selectedItem = ref(data[0]); // 选中条目数据
 
 // 切换功能选项

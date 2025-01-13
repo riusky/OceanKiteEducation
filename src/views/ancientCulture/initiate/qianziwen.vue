@@ -127,7 +127,7 @@ import { data } from "@/data/ancientCulture/qianziwen"; // 数据导入
 const contentList = ref(data); // 数据
 
 const activeToggle = ref<string[]>([]);
-const fontSize = ref<number>(20);
+const fontSize = ref<number>(16);
 
 // 切换功能选项
 const toggleOption = (option: string) => {

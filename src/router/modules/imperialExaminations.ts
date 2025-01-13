@@ -1,18 +1,18 @@
 import { $t } from "@/plugins/i18n";
 
 export default {
-  path: "/ancientCulture", // 主路由路径：古代文化
-  redirect: "/ancientCulture/sanzijing", // 默认重定向到 "国学启蒙"
+  path: "/ancientCulture",
+  redirect: "/ancientCulture/sanzijing",
   meta: {
-    title: $t("AncientCulture.index"), // 路由标题：古代文化
+    title: $t("AncientCulture.index"),
   },
   children: [
     {
-      path: "/ancientCulture/sanzijing", // 路由路径：国学启蒙
-      name: "sanzijing", // 路由名称
+      path: "/ancientCulture/sanzijing",
+      name: "sanzijing",
       component: () => import("@/views/ancientCulture/initiate/sanzijing.vue"),
       meta: {
-        title: $t("AncientCulture.initiate"), // 路由标题：国学启蒙
+        title: $t("AncientCulture.initiate"),
       },
     },
     {
@@ -69,6 +69,14 @@ export default {
       path: "/ancientCulture/tangshi300",
       name: "tangshi300",
       component: () => import("@/views/ancientCulture/initiate/tangshi300.vue"),
+      meta: {
+        title: $t("AncientCulture.temperament"),
+      },
+    },
+    {
+      path: "/ancientCulture/songci300",
+      name: "songci300",
+      component: () => import("@/views/ancientCulture/initiate/songci300.vue"),
       meta: {
         title: $t("AncientCulture.temperament"),
       },

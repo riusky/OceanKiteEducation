@@ -40,7 +40,7 @@
 
             <!-- Title 列表 -->
             <div v-if="currentTitles.length" class="mt-4">
-              <ul class="title-list overflow-y-auto max-h-[200px]">
+              <ul class="title-list overflow-y-auto max-h-[300px]">
                 <TooltipProvider>
                   <li
                     v-for="(title, index) in currentTitles"

@@ -147,7 +147,7 @@ const formValues = ref({
   showPinyin: false, // 默认不显示拼音
   showExplanation: false, // 默认不显示注释
 });
-const fontSize = ref(20); // 默认字号 20
+const fontSize = ref(16); // 默认字号 20
 
 // 当前章节的所有段落
 const currentSections = computed(() => {

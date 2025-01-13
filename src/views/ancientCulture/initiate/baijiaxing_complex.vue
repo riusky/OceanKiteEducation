@@ -153,7 +153,7 @@ import { data } from "@/data/ancientCulture/baijiaxing_complex"; // 数据导入
 const contentList = ref(data);
 
 const activeToggle = ref<string[]>([]);
-const fontSize = ref<number>(20);
+const fontSize = ref<number>(16);
 const selectedItem = ref(data[0]); // 当前选中组
 
 // 切换功能选项

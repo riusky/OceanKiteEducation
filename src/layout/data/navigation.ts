@@ -40,6 +40,10 @@ export const navigation = {
           title: "唐诗三百首",
           url: "/ancientCulture/tangshi300",
         },
+        {
+          title: "宋词三百首",
+          url: "/ancientCulture/songci300",
+        },
       ],
     },
     {
