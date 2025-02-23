@@ -20,8 +20,8 @@
             <div class="flex flex-row items-center gap-x-2">
               <Checkbox
                 id="show-pinyin"
-                :checked="activeToggle.includes('pinyin')"
-                @update:checked="toggleOption('pinyin')"
+                :model-value="activeToggle.includes('pinyin')"
+                @update:model-value="toggleOption('pinyin')"
               />
               <label for="show-pinyin" class="font-medium leading-none">
                 显示拼音
@@ -32,8 +32,8 @@
             <div class="flex flex-row items-center gap-x-2">
               <Checkbox
                 id="show-explanation"
-                :checked="activeToggle.includes('explanation')"
-                @update:checked="toggleOption('explanation')"
+                :model-value="activeToggle.includes('explanation')"
+                @update:model-value="toggleOption('explanation')"
               />
               <label for="show-explanation" class="font-medium leading-none">
                 显示注释

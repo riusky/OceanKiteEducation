@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FieldProps } from "./interface";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -14,12 +15,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 
 import { DateFormatter, getLocalTimeZone } from "@internationalized/date";
-import { CalendarIcon } from "@radix-icons/vue";
+import { CalendarIcon } from "lucide-vue-next";
 import AutoFormLabel from "./AutoFormLabel.vue";
-import { beautifyObjectName } from "./utils";
+import { beautifyObjectName, maybeBooleanishToBoolean } from "./utils";
 
 defineProps<FieldProps>();
 
@@ -38,7 +38,13 @@ const df = new DateFormatter("en-US", {
         <slot v-bind="slotProps">
           <div>
             <Popover>
-              <PopoverTrigger as-child :disabled="disabled">
+              <PopoverTrigger
+                as-child
+                :disabled="
+                  maybeBooleanishToBoolean(config?.inputProps?.disabled) ??
+                  disabled
+                "
+              >
                 <Button
                   variant="outline"
                   :class="

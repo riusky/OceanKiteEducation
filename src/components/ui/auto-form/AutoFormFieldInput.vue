@@ -31,7 +31,7 @@ const inputComponent = computed(() =>
             :is="inputComponent"
             type="text"
             v-bind="{ ...slotProps.componentField, ...config?.inputProps }"
-            :disabled="disabled"
+            :disabled="config?.inputProps?.disabled ?? disabled"
           />
         </slot>
       </FormControl>

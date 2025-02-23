@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { TrashIcon } from "@radix-icons/vue";
+import { Trash } from "lucide-vue-next";
 import { ref } from "vue";
 import AutoFormLabel from "./AutoFormLabel.vue";
 import { beautifyObjectName } from "./utils";
@@ -45,7 +45,7 @@ async function parseFileAsString(file: File | undefined): Promise<string> {
             v-if="!inputFile"
             type="file"
             v-bind="{ ...config?.inputProps }"
-            :disabled="disabled"
+            :disabled="config?.inputProps?.disabled ?? disabled"
             @change="
               async (ev: InputEvent) => {
                 const file = (ev.target as HTMLInputElement).files?.[0];
@@ -73,7 +73,7 @@ async function parseFileAsString(file: File | undefined): Promise<string> {
                 }
               "
             >
-              <TrashIcon />
+              <Trash />
             </Button>
           </div>
         </slot>

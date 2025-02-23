@@ -29,7 +29,7 @@ defineProps<FieldProps>();
           <Input
             type="number"
             v-bind="{ ...slotProps.componentField, ...config?.inputProps }"
-            :disabled="disabled"
+            :disabled="config?.inputProps?.disabled ?? disabled"
           />
         </slot>
       </FormControl>

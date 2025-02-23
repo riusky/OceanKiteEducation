@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { cn } from "@/lib/utils";
 import { useEventListener, useMediaQuery, useVModel } from "@vueuse/core";
-import { TooltipProvider } from "radix-vue";
+import { TooltipProvider } from "reka-ui";
 import { computed, type HTMLAttributes, type Ref, ref } from "vue";
 import {
   provideSidebarContext,
@@ -88,7 +88,7 @@ provideSidebarContext({
       }"
       :class="
         cn(
-          'group/sidebar-wrapper flex min-h-svh w-full text-sidebar-foreground has-[[data-variant=inset]]:bg-sidebar',
+          'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
           props.class,
         )
       "

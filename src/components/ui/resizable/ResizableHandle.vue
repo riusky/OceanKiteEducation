@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { cn } from "@/lib/utils";
-import { DragHandleDots2Icon } from "@radix-icons/vue";
+import { GripVertical } from "lucide-vue-next";
 import {
   SplitterResizeHandle,
   type SplitterResizeHandleEmits,
   type SplitterResizeHandleProps,
   useForwardPropsEmits,
-} from "radix-vue";
+} from "reka-ui";
 import { computed, type HTMLAttributes } from "vue";
 
 const props = defineProps<
@@ -39,7 +39,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       <div
         class="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border"
       >
-        <DragHandleDots2Icon class="h-2.5 w-2.5" />
+        <GripVertical class="h-2.5 w-2.5" />
       </div>
     </template>
   </SplitterResizeHandle>
