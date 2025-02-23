@@ -61,11 +61,8 @@
       </div>
 
       <!-- 右侧内容展示区域 -->
-      <div class="flex-grow p-4 transition-all duration-300">
+      <div class="flex-grow p-3 transition-all duration-300">
         <Card class="h-full flex flex-col">
-          <CardHeader>
-            <h1 class="text-xl font-bold text-center">弟子规</h1>
-          </CardHeader>
           <CardContent class="flex-1 overflow-y-auto">
             <div class="content" :style="{ fontSize: fontSize + 'px' }">
               <div
@@ -200,7 +197,7 @@ h1 {
 
 .content {
   max-height: calc(
-    100vh - 200px
+    100vh - 114px
   ); /* 设置一个最大高度，考虑 header 和控制器的高度 */
 
   padding: 5px; /* 为内容添加内边距 */
