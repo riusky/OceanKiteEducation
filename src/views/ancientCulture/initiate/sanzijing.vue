@@ -13,28 +13,28 @@
               《三字经》三字一句，朗朗上口，短小精悍，通俗易懂。以“人之初，性本善”起篇，叙述了三纲五常十义，五谷六畜七情，四书六经诸子，历史朝代更迭，最后以著名事例作结。通篇涵盖了中国传统文化文学、历史、天文、地理等知识，宣扬了传统伦理思想，如“仁、义、诚、敬、孝”。
             </p>
 
-            <div class="flex flex-col gap-2">
-              <div class="flex items-center">
-                <Checkbox
-                  id="show-pinyin"
-                  :checked="activeToggle.includes('pinyin')"
-                  @update:checked="toggleOption('pinyin')"
-                />
-                <label for="show-pinyin" class="ml-2 font-medium">
-                  显示拼音
-                </label>
-              </div>
+            <!-- 显示拼音 -->
+            <div class="flex flex-row items-center gap-x-2">
+              <Checkbox
+                id="show-pinyin"
+                :model-value="activeToggle.includes('pinyin')"
+                @update:model-value="toggleOption('pinyin')"
+              />
+              <label for="show-pinyin" class="font-medium leading-none">
+                显示拼音
+              </label>
+            </div>
 
-              <div class="flex items-center">
-                <Checkbox
-                  id="show-explanation"
-                  :checked="activeToggle.includes('explanation')"
-                  @update:checked="toggleOption('explanation')"
-                />
-                <label for="show-explanation" class="ml-2 font-medium">
-                  显示注释
-                </label>
-              </div>
+            <!-- 显示注释 -->
+            <div class="flex flex-row items-center gap-x-2">
+              <Checkbox
+                id="show-explanation"
+                :model-value="activeToggle.includes('explanation')"
+                @update:model-value="toggleOption('explanation')"
+              />
+              <label for="show-explanation" class="font-medium leading-none">
+                显示注释
+              </label>
             </div>
 
             <!-- 调整字号 -->
@@ -61,11 +61,8 @@
       </div>
 
       <!-- 右侧内容展示区域 -->
-      <div class="flex-grow p-2 transition-all duration-300">
+      <div class="flex-grow p-3 transition-all duration-300">
         <Card class="h-full flex flex-col">
-          <CardHeader>
-            <h1 class="text-xl font-bold text-center">三字经</h1>
-          </CardHeader>
           <CardContent class="flex-1 overflow-y-auto">
             <div class="content" :style="{ fontSize: fontSize + 'px' }">
               <div
@@ -200,7 +197,7 @@ h1 {
 
 .content {
   max-height: calc(
-    100vh - 200px
+    100vh - 114px
   ); /* 设置一个最大高度，考虑 header 和控制器的高度 */
 
   padding: 5px; /* 为内容添加内边距 */

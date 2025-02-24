@@ -11,7 +11,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { computed } from "vue";
 import AutoFormLabel from "./AutoFormLabel.vue";
-import { beautifyObjectName } from "./utils";
+import { beautifyObjectName, maybeBooleanishToBoolean } from "./utils";
 
 const props = defineProps<FieldProps>();
 
@@ -29,7 +29,10 @@ const booleanComponent = computed(() =>
             <component
               :is="booleanComponent"
               v-bind="{ ...slotProps.componentField }"
-              :disabled="disabled"
+              :disabled="
+                maybeBooleanishToBoolean(config?.inputProps?.disabled) ??
+                disabled
+              "
               :checked="slotProps.componentField.modelValue"
               @update:checked="slotProps.componentField['onUpdate:modelValue']"
             />

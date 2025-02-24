@@ -2,7 +2,7 @@
 import {
   RangeCalendarGridHead,
   type RangeCalendarGridHeadProps,
-} from "radix-vue";
+} from "reka-ui";
 
 const props = defineProps<RangeCalendarGridHeadProps>();
 </script>
