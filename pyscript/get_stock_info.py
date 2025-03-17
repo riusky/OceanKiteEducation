@@ -236,8 +236,8 @@ def insert_kline_data(conn, table_name, stock_code, kline_data):
 # 获取股票的 K 线数据
 def fetch_kline_data(stock_code, k_type, start_date):
     try:
-        res_df = adata.stock.market.get_market(stock_code=stock_code, k_type=k_type, start_date=start_date)
-        print(f"Fetched {k_type} K-line data for stock {stock_code} successfully!")
+        res_df = adata.stock.market.get_market(stock_code=stock_code, k_type=k_type, start_date=str(start_date))
+        print(f"Fetched {k_type} K-line data for stock: {stock_code} date: {start_date} count: {len(res_df)} successfully!")
         return res_df
     except Exception as e:
         print(f"Error fetching {k_type} K-line data for stock {stock_code}: {e}")
@@ -262,12 +262,12 @@ def main():
         create_kline_table(conn, monthly_table)
 
         # 获取所有股票代码
-        # stocks_df = adata.stock.info.all_code()
+        stocks_df = adata.stock.info.all_code()
 
         # 创建一个包含固定股票代码的 DataFrame 用于测试
-        stocks_df = pd.DataFrame({
-            'stock_code': ['000001', '600000']  # 示例股票代码
-        })
+        # stocks_df = pd.DataFrame({
+        #     'stock_code': ['000001', '600000']  # 示例股票代码
+        # })
         if stocks_df is None:
             return
         
@@ -277,54 +277,53 @@ def main():
             
             # 获取当前股票的最新交易日
             latest_date = get_latest_trade_date(conn, daily_table, stock_code)
-            
-            # 如果存在最新交易日，则从该日期开始更新；否则从 2020 年开始插入
-            start_date = latest_date if latest_date else '2020-01-01'
-            
-            # 获取日K数据并插入
-            daily_data = fetch_kline_data(stock_code, k_type=1, start_date=start_date)
-            if daily_data is not None:
-                insert_kline_data(conn, daily_table, stock_code, daily_data)
+            if latest_date is None:
+                # 如果存在最新交易日，则从该日期开始更新；否则从 2020 年开始插入
+                start_date = latest_date if latest_date else '2020-01-01'
+                
+                # 获取日K数据并插入
+                daily_data = fetch_kline_data(stock_code, k_type=1, start_date=start_date)
+                if daily_data is not None:
+                    insert_kline_data(conn, daily_table, stock_code, daily_data)
 
             # 获取当前股票的最新交易日
             latest_date = get_latest_trade_date(conn, weekly_table, stock_code)
-            
-            # 如果存在最新交易日，则删除最新交易日的数据
-            if latest_date:
-                delete_latest_trade_date(conn, weekly_table, stock_code)
+            if latest_date is None:
+                # 如果存在最新交易日，则删除最新交易日的数据
+                if latest_date:
+                    delete_latest_trade_date(conn, weekly_table, stock_code)
 
-            # 再次获取当前股票的最新交易日
-            latest_date = get_latest_trade_date(conn, weekly_table, stock_code)
-            print("weekly_table latest_date {}",latest_date)
+                # 再次获取当前股票的最新交易日
+                latest_date = get_latest_trade_date(conn, weekly_table, stock_code)
+                print("weekly_table latest_date {}",latest_date)
 
-            # 从最新交易日开始更新数据
-            start_date = latest_date if latest_date else '2020-01-01'
-            
-            # 获取周K数据并插入
-            weekly_data = fetch_kline_data(stock_code, k_type=2, start_date=start_date)
-            if weekly_data is not None:
-                insert_kline_data(conn, weekly_table, stock_code, weekly_data)
+                # 从最新交易日开始更新数据
+                start_date = latest_date if latest_date else '2020-01-01'
+                
+                # 获取周K数据并插入
+                weekly_data = fetch_kline_data(stock_code, k_type=2, start_date=start_date)
+                if weekly_data is not None:
+                    insert_kline_data(conn, weekly_table, stock_code, weekly_data)
 
             # 获取当前股票的最新交易日
             latest_date = get_latest_trade_date(conn, monthly_table, stock_code)
-            
-            # 如果存在最新交易日，则删除最新交易日的数据
-            if latest_date:
-                delete_latest_trade_date(conn, monthly_table, stock_code)
-            
-            # 再次获取当前股票的最新交易日
-            latest_date = get_latest_trade_date(conn, monthly_table, stock_code)
-            print("monthly_table latest_date {}",latest_date)
-            
-            # 从最新交易日开始更新数据
-            start_date = latest_date if latest_date else '2020-01-01'
-            
-            # 获取月K数据并插入
-            monthly_data = fetch_kline_data(stock_code, k_type=3, start_date=start_date)
+            if latest_date is None:
+                # 如果存在最新交易日，则删除最新交易日的数据
+                if latest_date:
+                    delete_latest_trade_date(conn, monthly_table, stock_code)
+                
+                # 再次获取当前股票的最新交易日
+                latest_date = get_latest_trade_date(conn, monthly_table, stock_code)
+                print("monthly_table latest_date {}",latest_date)
+                
+                # 从最新交易日开始更新数据
+                start_date = latest_date if latest_date else '2020-01-01'
+                
+                # 获取月K数据并插入
+                monthly_data = fetch_kline_data(stock_code, k_type=3, start_date=start_date)
 
-            print(monthly_data)
-            if monthly_data is not None:
-                insert_kline_data(conn, monthly_table, stock_code, monthly_data)
+                if monthly_data is not None:
+                    insert_kline_data(conn, monthly_table, stock_code, monthly_data)
     
     finally:
         # 关闭数据库连接
