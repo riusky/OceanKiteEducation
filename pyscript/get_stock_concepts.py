@@ -2,11 +2,13 @@ import adata
 import pandas as pd
 import psycopg2
 from psycopg2 import sql, extras
-
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # 单只股票所属概念-ths
 # 数据库连接配置
 DB_CONFIG = {
-    'dbname': 'ocean_kite_finance',
+    'dbname': 'ocean_kite',
     'user': 'postgres',
     'password': 'riusky2025',
     'host': 'localhost',

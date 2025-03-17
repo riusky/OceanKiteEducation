@@ -3,11 +3,13 @@ import pandas as pd
 import psycopg2
 from psycopg2 import sql, extras
 from datetime import datetime
-import os
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # 数据库连接配置
 DB_CONFIG = {
-    'dbname': 'ocean_kite_finance',  # 数据库名称
+    'dbname': 'ocean_kite',  # 数据库名称
     'user': 'postgres',              # 数据库用户名
     'password': 'riusky2025',        # 数据库密码
     'host': 'localhost',             # 数据库主机
